@@ -1,30 +1,31 @@
+import { useState } from "react";
+
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
-function AppLayout({ children }) {
+export default function AppLayout({
+  children,
+}) {
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
-    return (
+  return (
+    <div className="flex h-screen bg-[#050608]">
 
-        <div className="flex h-screen bg-[#050608]">
+      <Sidebar
+        sidebarOpen={sidebarOpen}
+        setSidebarOpen={setSidebarOpen}
+      />
 
-            <Sidebar />
+      <div className="flex flex-1 flex-col overflow-hidden">
 
-            <div className="flex flex-1 flex-col">
+        <Topbar />
 
-                <Topbar />
+        <main className="flex-1 overflow-auto p-10">
+          {children}
+        </main>
 
-                <main className="flex-1 overflow-auto p-8">
+      </div>
 
-                    {children}
-
-                </main>
-
-            </div>
-
-        </div>
-
-    );
-
+    </div>
+  );
 }
-
-export default AppLayout;

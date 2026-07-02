@@ -1,29 +1,44 @@
-function Logo() {
-    return (
-        <div className="flex items-center gap-3">
+import { useNavigate, useLocation } from "react-router-dom";
 
-            <div className="h-10 w-10 rounded-xl bg-green-400 shadow-[0_0_20px_#00ff9d] flex items-center justify-center">
+export default function Logo() {
+  const navigate = useNavigate();
+  const location = useLocation();
 
-                <span className="text-black font-black">
-                    T
-                </span>
+  const handleClick = () => {
+    if (location.pathname !== "/") {
+      navigate("/");
+      return;
+    }
 
-            </div>
+    if (window.scrollY > 0) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+      return;
+    }
 
-            <div>
+    window.location.reload();
+  };
 
-                <h1 className="text-xl font-bold text-green-400">
-                    ThreatEye
-                </h1>
+  return (
+    <button
+      onClick={handleClick}
+      className="flex items-center gap-4"
+    >
+      <div className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center text-black font-bold shadow-[0_0_30px_rgba(34,197,94,.6)]">
+        T
+      </div>
 
-                <p className="text-xs text-gray-500">
-                    Cyber Threat Hunting
-                </p>
+      <div>
+        <h1 className="text-2xl font-bold text-green-400">
+          ThreatEye
+        </h1>
 
-            </div>
-
-        </div>
-    );
+        <p className="text-sm text-zinc-500">
+          Cyber Threat Hunting
+        </p>
+      </div>
+    </button>
+  );
 }
-
-export default Logo;

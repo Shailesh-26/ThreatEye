@@ -1,10 +1,14 @@
 import {
     Routes,
-    Route
+    Route,
+    Navigate
 } from "react-router-dom";
+
+import { isAuthenticated } from "./services/authService";
 
 import AppLayout from "./components/layout/AppLayout";
 
+import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Logs from "./pages/Logs";
 import Alerts from "./pages/Alerts";
@@ -12,10 +16,23 @@ import Detections from "./pages/Detections";
 import Timeline from "./pages/Timeline";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
-import Login from "./pages/Login";
+
+function PrivateRoute({ children }) {
+
+    if (!isAuthenticated()) {
+
+        return <Navigate to="/login" replace />;
+
+    }
+
+    return children;
+
+}
 
 export default function App() {
+
     return (
+
         <Routes>
 
             <Route
@@ -26,66 +43,70 @@ export default function App() {
             <Route
                 path="/"
                 element={
-                    <AppLayout>
-                        <Dashboard />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout>
+                            <Dashboard/>
+                        </AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/logs"
                 element={
-                    <AppLayout>
-                        <Logs />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Logs/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/alerts"
                 element={
-                    <AppLayout>
-                        <Alerts />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Alerts/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/detections"
                 element={
-                    <AppLayout>
-                        <Detections />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Detections/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/timeline"
                 element={
-                    <AppLayout>
-                        <Timeline />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Timeline/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/reports"
                 element={
-                    <AppLayout>
-                        <Reports />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Reports/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
             <Route
                 path="/settings"
                 element={
-                    <AppLayout>
-                        <Settings />
-                    </AppLayout>
+                    <PrivateRoute>
+                        <AppLayout><Settings/></AppLayout>
+                    </PrivateRoute>
                 }
             />
 
         </Routes>
+
     );
+
 }

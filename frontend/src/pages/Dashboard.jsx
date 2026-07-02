@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Database, ShieldAlert, UserX, Globe } from "lucide-react";
+import RecentAlerts from "../components/dashboard/RecentAlerts";
 
 import { getDashboard } from "../services/dashboardService";
 import StatCard from "../components/cards/StatCard";
@@ -97,7 +98,9 @@ export default function Dashboard() {
                     icon={<Globe size={28} />}
                     color="#00d9ff"
                 />
+                
             </motion.div>
+            <RecentAlerts />
         </>
     );
 }

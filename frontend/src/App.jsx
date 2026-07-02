@@ -1,6 +1,6 @@
 import {
-  Routes,
-  Route,
+    Routes,
+    Route
 } from "react-router-dom";
 
 import AppLayout from "./components/layout/AppLayout";
@@ -12,74 +12,80 @@ import Detections from "./pages/Detections";
 import Timeline from "./pages/Timeline";
 import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
+import Login from "./pages/Login";
 
 export default function App() {
-  return (
-    
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <AppLayout>
-              <Dashboard />
-            </AppLayout>
-          }
-        />
+    return (
+        <Routes>
 
-        <Route
-          path="/logs"
-          element={
-            <AppLayout>
-              <Logs />
-            </AppLayout>
-          }
-        />
+            <Route
+                path="/login"
+                element={<Login />}
+            />
 
-        <Route
-          path="/alerts"
-          element={
-            <AppLayout>
-              <Alerts />
-            </AppLayout>
-          }
-        />
+            <Route
+                path="/"
+                element={
+                    <AppLayout>
+                        <Dashboard />
+                    </AppLayout>
+                }
+            />
 
-        <Route
-          path="/detections"
-          element={
-            <AppLayout>
-              <Detections />
-            </AppLayout>
-          }
-        />
+            <Route
+                path="/logs"
+                element={
+                    <AppLayout>
+                        <Logs />
+                    </AppLayout>
+                }
+            />
 
-        <Route
-          path="/timeline"
-          element={
-            <AppLayout>
-              <Timeline />
-            </AppLayout>
-          }
-        />
+            <Route
+                path="/alerts"
+                element={
+                    <AppLayout>
+                        <Alerts />
+                    </AppLayout>
+                }
+            />
 
-        <Route
-          path="/reports"
-          element={
-            <AppLayout>
-              <Reports />
-            </AppLayout>
-          }
-        />
+            <Route
+                path="/detections"
+                element={
+                    <AppLayout>
+                        <Detections />
+                    </AppLayout>
+                }
+            />
 
-        <Route
-          path="/settings"
-          element={
-            <AppLayout>
-              <Settings />
-            </AppLayout>
-          }
-        />
-      </Routes>
-    
-  );
+            <Route
+                path="/timeline"
+                element={
+                    <AppLayout>
+                        <Timeline />
+                    </AppLayout>
+                }
+            />
+
+            <Route
+                path="/reports"
+                element={
+                    <AppLayout>
+                        <Reports />
+                    </AppLayout>
+                }
+            />
+
+            <Route
+                path="/settings"
+                element={
+                    <AppLayout>
+                        <Settings />
+                    </AppLayout>
+                }
+            />
+
+        </Routes>
+    );
 }

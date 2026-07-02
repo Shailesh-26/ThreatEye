@@ -6,6 +6,8 @@ import ThreatChart from "../components/dashboard/ThreatChart";
 import { getDashboard } from "../services/dashboardService";
 import StatCard from "../components/cards/StatCard";
 
+import RefreshBadge from "../components/common/RefreshBadge";
+
 export default function Dashboard() {
     const [dashboard, setDashboard] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -16,6 +18,7 @@ export default function Dashboard() {
             try {
                 const data = await getDashboard();
                 setDashboard(data);
+                setError("");
             } catch (err) {
                 console.error(err);
                 setError("Failed to load dashboard");
@@ -25,6 +28,12 @@ export default function Dashboard() {
         }
 
         loadDashboard();
+
+        const interval = setInterval(() => {
+            loadDashboard();
+        }, 10000);
+
+        return () => clearInterval(interval);
     }, []);
 
     if (loading) {
@@ -51,7 +60,11 @@ export default function Dashboard() {
 
             <p className="text-zinc-400 mt-3">
                 Live overview of your ThreatEye SOC.
+                
             </p>
+            <div className="mt-4">
+                <RefreshBadge />
+            </div>
 
             <motion.div
                 initial={{
@@ -100,14 +113,16 @@ export default function Dashboard() {
                 />
                 
             </motion.div>
-            <RecentAlerts />
-            <div className="mt-8 grid gap-8 xl:grid-cols-2">
-  <ThreatChart />
 
-  <div className="rounded-3xl border border-zinc-800 bg-[#0B0F14] p-6 flex items-center justify-center text-zinc-500">
-    Login Trend (Coming Next 🚀)
-  </div>
-</div>
+            <RecentAlerts />
+
+            <div className="mt-8 grid gap-8 xl:grid-cols-2">
+                <ThreatChart />
+
+                <div className="rounded-3xl border border-zinc-800 bg-[#0B0F14] p-6 flex items-center justify-center text-zinc-500">
+                    Login Trend (Coming Next 🚀)
+                </div>
+            </div>
         </>
     );
 }

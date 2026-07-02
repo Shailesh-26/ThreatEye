@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Database, ShieldAlert, UserX, Globe } from "lucide-react";
 import RecentAlerts from "../components/dashboard/RecentAlerts";
-
+import ThreatChart from "../components/dashboard/ThreatChart";
 import { getDashboard } from "../services/dashboardService";
 import StatCard from "../components/cards/StatCard";
 
@@ -101,6 +101,13 @@ export default function Dashboard() {
                 
             </motion.div>
             <RecentAlerts />
+            <div className="mt-8 grid gap-8 xl:grid-cols-2">
+  <ThreatChart />
+
+  <div className="rounded-3xl border border-zinc-800 bg-[#0B0F14] p-6 flex items-center justify-center text-zinc-500">
+    Login Trend (Coming Next 🚀)
+  </div>
+</div>
         </>
     );
 }

@@ -1,7 +1,7 @@
 import {
-    Routes,
-    Route,
-    Navigate
+  Routes,
+  Route,
+  Navigate,
 } from "react-router-dom";
 
 import { isAuthenticated } from "./services/authService";
@@ -18,95 +18,117 @@ import Reports from "./pages/Reports";
 import Settings from "./pages/Settings";
 
 function PrivateRoute({ children }) {
+  return isAuthenticated()
+    ? children
+    : <Navigate to="/login" replace />;
+}
 
-    if (!isAuthenticated()) {
-
-        return <Navigate to="/login" replace />;
-
-    }
-
-    return children;
-
+function PublicRoute({ children }) {
+  return isAuthenticated()
+    ? <Navigate to="/" replace />
+    : children;
 }
 
 export default function App() {
+  return (
+    <Routes>
 
-    return (
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
 
-        <Routes>
+      <Route
+        path="/"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Dashboard />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/login"
-                element={<Login />}
-            />
+      <Route
+        path="/logs"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Logs />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/"
-                element={
-                    <PrivateRoute>
-                        <AppLayout>
-                            <Dashboard/>
-                        </AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="/alerts"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Alerts />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/logs"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Logs/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="/detections"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Detections />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/alerts"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Alerts/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="/timeline"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Timeline />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/detections"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Detections/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="/reports"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Reports />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/timeline"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Timeline/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="/settings"
+        element={
+          <PrivateRoute>
+            <AppLayout>
+              <Settings />
+            </AppLayout>
+          </PrivateRoute>
+        }
+      />
 
-            <Route
-                path="/reports"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Reports/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
+      <Route
+        path="*"
+        element={
+          <Navigate
+            to={isAuthenticated() ? "/" : "/login"}
+            replace
+          />
+        }
+      />
 
-            <Route
-                path="/settings"
-                element={
-                    <PrivateRoute>
-                        <AppLayout><Settings/></AppLayout>
-                    </PrivateRoute>
-                }
-            />
-
-        </Routes>
-
-    );
-
+    </Routes>
+  );
 }

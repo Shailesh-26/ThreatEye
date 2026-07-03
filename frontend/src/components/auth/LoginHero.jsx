@@ -5,6 +5,8 @@ import RadarAnimation from "./RadarAnimation";
 import TypingHeadline from "./TypingHeadline";
 import ParticleField from "./ParticleField";
 import ThreatFeed from "./ThreatFeed";
+import MouseParallax from "./MouseParallax";
+import ScanLines from "./ScanLines";
 
 const features = [
   {
@@ -31,8 +33,9 @@ const features = [
 
 export default function LoginHero() {
   return (
-    <div className="relative flex h-full items-center overflow-hidden">
+    <div className="min-h-[1150px] relative pt-8 pb-16">
       <ParticleField />
+     
 
       {/* Background Glow */}
 
@@ -44,7 +47,7 @@ export default function LoginHero() {
 
       </div>
 
-      <div className="relative z-10 grid w-full grid-cols-2 gap-14 items-center">
+      <div className="grid grid-cols-2 gap-5 mt-12">
 
         {/* Left */}
 
@@ -124,11 +127,14 @@ export default function LoginHero() {
   transition={{ duration: 1 }}
   className="flex flex-col items-center gap-10"
 >
-  <RadarAnimation />
+  <MouseParallax>
+    <RadarAnimation />
+</MouseParallax>
   <ThreatFeed />
 </motion.div>
 
       </div>
+      
 
     </div>
   );

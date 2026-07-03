@@ -5,29 +5,38 @@ import CyberGrid from "../components/auth/CyberGrid";
 import FloatingHexagons from "../components/auth/FloatingHexagons";
 import LoginHero from "../components/auth/LoginHero";
 import LoginForm from "../components/auth/LoginForm";
+import { useRef } from "react";
+import CyberScrollbar from "../components/auth/CyberScrollbar";
 
 export default function Login() {
+  const leftRef = useRef(null);
   if (isAuthenticated()) {
     return <Navigate to="/" replace />;
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
+    <div className="relative h-screen overflow-hidden bg-[#050608] text-white">
       <CyberGrid />
       <FloatingHexagons />
 
-      <div className="relative z-10 flex min-h-screen">
-        {/* Left Side */}
-        <section className="hidden lg:flex w-[58%] px-16 xl:px-24 py-16 items-center">
+      <div className="relative z-10 flex h-screen">
+        {/* LEFT PANEL */}
+        <section
+    ref={leftRef}
+    className="relative hidden lg:block w-[58%] h-screen overflow-y-auto overflow-x-hidden px-8 xl:px-12 no-scrollbar"
+>
           <LoginHero />
+          <CyberScrollbar containerRef={leftRef}/>
         </section>
 
         {/* Divider */}
-        <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-green-500/20 to-transparent" />
+        <div className="hidden lg:block w-px h-full bg-gradient-to-b from-transparent via-green-500/20 to-transparent" />
 
-        {/* Right Side */}
-        <section className="flex w-full lg:flex-1 items-center justify-center px-6 sm:px-10 lg:px-16 py-12">
-          <LoginForm />
+        {/* RIGHT PANEL */}
+        <section className="flex-1 h-screen sticky top-0 flex items-center justify-center px-10">
+          <div className="w-full max-w-lg">
+            <LoginForm />
+          </div>
         </section>
       </div>
 

@@ -21,3 +21,36 @@ body {
 
     overflow-x: hidden;
 }
+@keyframes gridMove{
+0%{
+transform:translateY(0);
+}
+100%{
+transform:translateY(45px);
+}
+}
+
+.animate-grid{
+animation:gridMove 10s linear infinite;
+}
+
+@keyframes floatHex{
+0%,100%{
+transform:translateY(0px) rotate(0deg);
+}
+50%{
+transform:translateY(-20px) rotate(8deg);
+}
+}
+
+.animate-float{
+animation:floatHex 8s ease-in-out infinite;
+clip-path:polygon(
+25% 6.7%,
+75% 6.7%,
+100% 50%,
+75% 93.3%,
+25% 93.3%,
+0 50%
+);
+}

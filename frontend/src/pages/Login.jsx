@@ -1,145 +1,38 @@
-import { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { Shield, Eye, EyeOff } from "lucide-react";
-import { login, isAuthenticated } from "../services/authService";
+import { isAuthenticated } from "../services/authService";
+
+import CyberGrid from "../components/auth/CyberGrid";
+import FloatingHexagons from "../components/auth/FloatingHexagons";
+import LoginHero from "../components/auth/LoginHero";
+import LoginForm from "../components/auth/LoginForm";
 
 export default function Login() {
+  if (isAuthenticated()) {
+    return <Navigate to="/" replace />;
+  }
 
-    const [email, setEmail] = useState("");
+  return (
+    <div className="relative min-h-screen overflow-hidden bg-[#050608] text-white">
+      <CyberGrid />
+      <FloatingHexagons />
 
-    const [password, setPassword] = useState("");
+      <div className="relative z-10 flex min-h-screen">
+        {/* Left Side */}
+        <section className="hidden lg:flex w-[58%] px-16 xl:px-24 py-16 items-center">
+          <LoginHero />
+        </section>
 
-    const [showPassword, setShowPassword] = useState(false);
+        {/* Divider */}
+        <div className="hidden lg:block w-px bg-gradient-to-b from-transparent via-green-500/20 to-transparent" />
 
-    const [loading, setLoading] = useState(false);
+        {/* Right Side */}
+        <section className="flex w-full lg:flex-1 items-center justify-center px-6 sm:px-10 lg:px-16 py-12">
+          <LoginForm />
+        </section>
+      </div>
 
-    const [error, setError] = useState("");
-
-    if (isAuthenticated()) {
-
-        return <Navigate to="/" replace />;
-
-    }
-
-    async function handleLogin(e) {
-
-        e.preventDefault();
-
-        setLoading(true);
-
-        setError("");
-
-        try {
-
-            await login(email, password);
-
-            window.location.href = "/";
-
-        }
-
-        catch {
-
-            setError("Invalid email or password");
-
-        }
-
-        finally {
-
-            setLoading(false);
-
-        }
-
-    }
-
-    return (
-
-        <div className="min-h-screen flex items-center justify-center bg-[#050608] px-5">
-
-            <div className="w-full max-w-md rounded-3xl border border-green-500/20 bg-[#11161d]/95 backdrop-blur-xl shadow-[0_0_60px_rgba(34,197,94,.08)] p-10">
-
-                <div className="flex items-center gap-4 mb-8">
-
-                    <div className="w-16 h-16 rounded-2xl bg-green-500 flex items-center justify-center shadow-[0_0_35px_rgba(34,197,94,.5)]">
-
-                        <Shield className="text-black" size={28}/>
-
-                    </div>
-
-                    <div>
-
-                        <h1 className="text-3xl font-bold">
-
-                            Welcome Back
-
-                        </h1>
-
-                        <p className="text-zinc-500">
-
-                            ThreatEye Secure Login
-
-                        </p>
-
-                    </div>
-
-                </div>
-
-                <form onSubmit={handleLogin} className="space-y-5">
-
-                    <input
-                        type="email"
-                        placeholder="Email Address"
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)}
-                        className="w-full rounded-xl bg-[#0b0f14] border border-zinc-800 px-5 py-4 outline-none focus:border-green-500"
-                    />
-
-                    <div className="relative">
-
-                        <input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Password"
-                            value={password}
-                            onChange={(e)=>setPassword(e.target.value)}
-                            className="w-full rounded-xl bg-[#0b0f14] border border-zinc-800 px-5 py-4 pr-14 outline-none focus:border-green-500"
-                        />
-
-                        <button
-                            type="button"
-                            onClick={()=>setShowPassword(!showPassword)}
-                            className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500"
-                        >
-
-                            {showPassword ? <EyeOff size={20}/> : <Eye size={20}/>}
-
-                        </button>
-
-                    </div>
-
-                    {error && (
-
-                        <p className="text-red-400">
-
-                            {error}
-
-                        </p>
-
-                    )}
-
-                    <button
-                        disabled={loading}
-                        className="w-full rounded-xl bg-green-500 py-4 font-bold text-black transition hover:scale-[1.02] hover:bg-green-400"
-                    >
-
-                        {loading ? "Signing In..." : "LOGIN"}
-
-                    </button>
-
-                </form>
-
-            </div>
-
-        </div>
-
-    );
-
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,.08),transparent_40%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
+    </div>
+  );
 }

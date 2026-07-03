@@ -1,6 +1,11 @@
 import { ShieldCheck, Radar, Activity, Cpu } from "lucide-react";
 import { motion } from "framer-motion";
 
+import RadarAnimation from "./RadarAnimation";
+import TypingHeadline from "./TypingHeadline";
+import ParticleField from "./ParticleField";
+import ThreatFeed from "./ThreatFeed";
+
 const features = [
   {
     icon: ShieldCheck,
@@ -26,95 +31,104 @@ const features = [
 
 export default function LoginHero() {
   return (
-    <div className="relative flex flex-col justify-center h-full overflow-hidden">
+    <div className="relative flex h-full items-center overflow-hidden">
+      <ParticleField />
 
       {/* Background Glow */}
 
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
 
-        <div className="absolute -left-32 top-20 h-72 w-72 rounded-full bg-green-500/20 blur-[120px]" />
+        <div className="absolute -left-40 top-20 h-80 w-80 rounded-full bg-green-500/15 blur-[140px]" />
 
-        <div className="absolute bottom-10 right-10 h-80 w-80 rounded-full bg-cyan-500/10 blur-[150px]" />
+        <div className="absolute right-0 bottom-0 h-96 w-96 rounded-full bg-cyan-500/10 blur-[180px]" />
 
       </div>
 
-      {/* Grid */}
+      <div className="relative z-10 grid w-full grid-cols-2 gap-14 items-center">
 
-      <div
-        className="absolute inset-0 opacity-[0.08]"
-        style={{
-          backgroundImage: `
-          linear-gradient(rgba(34,197,94,.35) 1px, transparent 1px),
-          linear-gradient(90deg, rgba(34,197,94,.35) 1px, transparent 1px)
-          `,
-          backgroundSize: "45px 45px"
-        }}
-      />
+        {/* Left */}
 
-      <motion.div
-        initial={{ opacity: 0, x: -60 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: .8 }}
-        className="relative z-10"
-      >
+        <motion.div
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: .8 }}
+        >
 
-        <div className="inline-flex items-center rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2 text-green-400 text-sm mb-8">
+          <div className="inline-flex items-center rounded-full border border-green-500/30 bg-green-500/10 px-4 py-2 text-sm text-green-400 mb-8">
 
-          ● ThreatEye SOC Platform
+            ● ThreatEye Enterprise SOC
 
-        </div>
+          </div>
 
-        <h1 className="text-7xl font-black leading-tight">
-          Monitor.
-          <br />
-          Detect.
-          <br />
-          <span className="text-green-400">
-            Respond.
-          </span>
-        </h1>
+          <TypingHeadline />
 
-        <p className="mt-8 text-xl text-zinc-400 max-w-xl leading-9">
-          Enterprise-grade Cyber Threat Hunting Platform built for real-time
-          monitoring, intelligent detections and rapid incident response.
-        </p>
+          <div className="grid grid-cols-2 gap-5 mt-12">
 
-        <div className="grid grid-cols-2 gap-6 mt-16">
+            {features.map((feature) => {
 
-          {features.map((item) => {
+              const Icon = feature.icon;
 
-            const Icon = item.icon;
+              return (
 
-            return (
+                <motion.div
+                  key={feature.title}
+                  whileHover={{
+                    y: -5,
+                    scale: 1.02
+                  }}
+                  transition={{
+                    duration: .2
+                  }}
+                  className="
+                    rounded-2xl
+                    border
+                    border-green-500/10
+                    bg-white/[0.03]
+                    backdrop-blur-xl
+                    p-6
+                  "
+                >
 
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                key={item.title}
-                className="rounded-2xl border border-green-500/10 bg-white/[0.03] p-6 backdrop-blur"
-              >
+                  <Icon
+                    size={26}
+                    className="text-green-400"
+                  />
 
-                <Icon
-                  size={28}
-                  className="text-green-400"
-                />
+                  <h3 className="mt-4 text-lg font-semibold">
 
-                <h3 className="mt-5 text-lg font-semibold">
-                  {item.title}
-                </h3>
+                    {feature.title}
 
-                <p className="mt-2 text-zinc-500">
-                  {item.desc}
-                </p>
+                  </h3>
 
-              </motion.div>
+                  <p className="mt-2 text-sm leading-6 text-zinc-500">
 
-            );
+                    {feature.desc}
 
-          })}
+                  </p>
 
-        </div>
+                </motion.div>
 
-      </motion.div>
+              );
+
+            })}
+
+          </div>
+
+        </motion.div>
+
+        {/* Right */}
+
+        <motion.div
+  initial={{ opacity: 0, scale: .9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 1 }}
+  className="flex flex-col items-center gap-10"
+>
+  <RadarAnimation />
+  <ThreatFeed />
+</motion.div>
+
+      </div>
 
     </div>
   );

@@ -1,26 +1,37 @@
 from fastapi import (
     APIRouter,
+    Depends,
     HTTPException,
-    Depends
+    status
+)
+
+from pydantic import BaseModel
+
+from app.core.dependencies import (
+    get_current_user
 )
 
 from app.schemas.auth import (
-    UserRegister,
-    UserLogin
+    UserLogin,
+    UserRegister
 )
 
 from app.services.auth_service import (
     AuthService
 )
 
-from app.core.dependencies import (
-    get_current_user
-)
-
 router = APIRouter(
     prefix="/auth",
     tags=["Authentication"]
 )
+
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
+
+
+class LogoutRequest(BaseModel):
+    refresh_token: str
 
 
 @router.post("/register")
@@ -34,7 +45,7 @@ async def register(
 
     except ValueError as e:
         raise HTTPException(
-            status_code=400,
+            status_code=status.HTTP_400_BAD_REQUEST,
             detail=str(e)
         )
 
@@ -51,7 +62,39 @@ async def login(
 
     except ValueError as e:
         raise HTTPException(
-            status_code=401,
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=str(e)
+        )
+
+
+@router.post("/refresh")
+async def refresh_session(
+    request: RefreshTokenRequest
+):
+    try:
+        return await AuthService.refresh_session(
+            request.refresh_token
+        )
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail=str(e)
+        )
+
+
+@router.post("/logout")
+async def logout(
+    request: LogoutRequest
+):
+    try:
+        return await AuthService.logout_user(
+            request.refresh_token
+        )
+
+    except ValueError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
             detail=str(e)
         )
 

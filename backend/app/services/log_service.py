@@ -1,83 +1,59 @@
 import pandas as pd
-from bson import ObjectId
-
-from app.database.mongodb import mongodb
-
+from fastapi import UploadFile,HTTPException
+from app.database.mongodb import mongodb as db
+from app.detection.detection_engine import DetectionEngine
+from app.services.alert_service import AlertService
 
 class LogService:
 
-    REQUIRED_COLUMNS = [
-        "timestamp",
-        "source_ip",
-        "event_type"
-    ]
-
     @staticmethod
-    async def process_csv(file):
+    async def process_csv(file:UploadFile):
 
-        dataframe = pd.read_csv(file.file)
+        try:
 
-        missing_columns = [
-            column
-            for column in LogService.REQUIRED_COLUMNS
-            if column not in dataframe.columns
-        ]
+            dataframe=pd.read_csv(file.file)
 
-        if missing_columns:
-            raise ValueError(
-                f"Missing required columns: {missing_columns}"
+            required=[
+                "timestamp",
+                "source_ip",
+                "event_type",
+                "status"
+            ]
+
+            for column in required:
+                if column not in dataframe.columns:
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Missing column: {column}"
+                    )
+
+            logs=dataframe.to_dict("records")
+
+            await db.database.logs.delete_many({})
+
+            if logs:
+                await db.database.logs.insert_many(logs)
+
+            alerts=DetectionEngine.run(logs)
+
+            await AlertService.save_alerts(alerts)
+
+            return{
+                "message":"Logs uploaded successfully",
+                "count":len(logs),
+                "alerts":len(alerts)
+            }
+
+        except Exception as e:
+
+            raise HTTPException(
+                status_code=400,
+                detail=str(e)
             )
-
-        records = []
-
-        for _, row in dataframe.iterrows():
-
-            row_dict = row.to_dict()
-
-            document = {
-    "timestamp": row_dict.get("timestamp"),
-    "source_ip": row_dict.get("source_ip"),
-    "event_type": row_dict.get("event_type"),
-    "status": row_dict.get("status"),
-    "raw_data": row_dict
-}
-
-            records.append(document)
-
-        if records:
-            result = await mongodb.database.logs.insert_many(
-                records
-            )
-
-            return len(result.inserted_ids)
-
-        return 0
 
     @staticmethod
     async def get_logs():
 
-        logs = []
-
-        cursor = mongodb.database.logs.find()
-
-        async for log in cursor:
-
-            log["_id"] = str(log["_id"])
-
-            logs.append(log)
+        logs=await db.database.logs.find({},{"_id":0}).to_list(500)
 
         return logs
-
-    @staticmethod
-    async def get_log_by_id(log_id: str):
-
-        log = await mongodb.database.logs.find_one(
-            {"_id": ObjectId(log_id)}
-        )
-
-        if not log:
-            return None
-
-        log["_id"] = str(log["_id"])
-
-        return log

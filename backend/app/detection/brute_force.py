@@ -1,51 +1,33 @@
-from collections import defaultdict
-
-
 class BruteForceDetector:
-
-    THRESHOLD = 3
 
     @staticmethod
     def detect(logs):
-
-        failed_counts = defaultdict(int)
+        failed = {}
 
         for log in logs:
+            if log.get("event_type") != "login_failed":
+                continue
 
-            if (
-                log.get("event_type")
-                == "login_failed"
-            ):
-
-                source_ip = log.get(
-                    "source_ip"
-                )
-
-                failed_counts[source_ip] += 1
+            ip = log["source_ip"]
+            failed.setdefault(ip, []).append(log)
 
         alerts = []
 
-        for ip, count in failed_counts.items():
+        for ip, entries in failed.items():
+            if len(entries) < 5:
+                continue
 
-            if count >= BruteForceDetector.THRESHOLD:
-
-                alerts.append(
-                    {
-                        "alert_type":
-                            "Brute Force",
-
-                        "severity":
-                            "High",
-
-                        "source_ip":
-                            ip,
-
-                        "failed_attempts":
-                            count,
-
-                        "description":
-                            "Possible brute force attack detected"
-                    }
-                )
+            alerts.append({
+                "title": "Brute Force Attack",
+                "severity": "Critical",
+                "source_ip": ip,
+                "count": len(entries),
+                "event": "Multiple Failed Logins",
+                "recommendation": "Immediately block the source IP and investigate authentication attempts.",
+                "mitre": "T1110",
+                "confidence": 98,
+                "detected_at": entries[-1]["timestamp"],
+                "icon": "shield"
+            })
 
         return alerts

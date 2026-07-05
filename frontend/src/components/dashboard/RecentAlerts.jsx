@@ -16,7 +16,7 @@ import {
 
 import AlertRow from "../alerts/AlertRow";
 
-import { getAlerts } from "../../services/alertService";
+import { fetchAlerts } from "../../services/alertService";
 
 export default function RecentAlerts() {
 
@@ -30,7 +30,7 @@ export default function RecentAlerts() {
 
             try {
 
-                const data = await getAlerts();
+                const data = await fetchAlerts();
 
                 setAlerts(data);
 

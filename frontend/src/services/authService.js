@@ -1,26 +1,73 @@
 import api from "./api";
 
-export async function login(email, password) {
+import {
+    clearSession,
+    setAccessToken,
+    setRefreshToken,
+    setSessionExpiry
+} from "./sessionService";
 
-    const response = await api.post("/auth/login", {
-        email,
-        password
-    });
+export async function login(
+    email,
+    password
+) {
+    const response = await api.post(
+        "/auth/login",
+        {
+            email,
+            password
+        }
+    );
 
-    localStorage.setItem("token", response.data.access_token);
+    const {
+        access_token,
+        refresh_token,
+        expires_in
+    } = response.data;
+
+    setAccessToken(
+        access_token
+    );
+
+    setRefreshToken(
+        refresh_token
+    );
+
+    setSessionExpiry(
+        expires_in
+    );
 
     return response.data;
-
 }
 
-export function logout() {
+export async function logout() {
+    try {
+        const refreshToken =
+            localStorage.getItem(
+                "refreshToken"
+            );
 
-    localStorage.removeItem("token");
-
+        if (refreshToken) {
+            await api.post(
+                "/auth/logout",
+                {
+                    refresh_token:
+                        refreshToken
+                }
+            );
+        }
+    } catch (error) {
+        console.error(
+            "Logout failed:",
+            error
+        );
+    } finally {
+        clearSession();
+    }
 }
 
 export function isAuthenticated() {
-
-    return !!localStorage.getItem("token");
-
+    return !!localStorage.getItem(
+        "token"
+    );
 }

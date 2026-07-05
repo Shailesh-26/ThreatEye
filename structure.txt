@@ -1,0 +1,404 @@
+have we implemented all of these, or if not tell me what what we have done so far? what else are remaining? 
+also i want u to reduce the no of files, the number of files we have are literally more i think. i would also
+like u to generate a 3 point resume level description for this project. and i want you to generate a perfect
+readme.md file as well. now neatly tell me and divide this whole list into phases. we will only move on to the
+next phase only if previous/current phase is done and tested. so where did we stop and how do we continue from 
+where we have stopped?
+list:
+✅ Session management (JWT expiry handling + warning modal).
+✅ Refresh token support (so "Extend Session" actually works instead of just logging in again).
+✅ Then continue with the cybersecurity roadmap:
+IOC extraction
+Threat score
+Port scan improvements
+SQL injection detection
+XSS detection
+Malware detection
+Investigation drawer enhancements
+Finally implement Block IP and Create Incident as real backend-backed features.
+u said this as well:
+Right now they'd just be fake buttons, and I don't want placeholder functionality.
+
+Instead, we'll implement them when we have the backend pieces:
+
+Block IP
+Store blocked IPs in MongoDB.
+Detection engine ignores or flags them.
+Dashboard shows "Blocked IPs".
+Uploading logs from a blocked IP generates a different alert.
+Create Incident
+Create an incident document in MongoDB.
+Assign status (Open / In Progress / Closed).
+Assign analyst.
+Add notes.
+Timeline updates.
+----
+Filter logs
+Search logs
+Brute Force Detection
+Port Scan Detection
+DDoS Detection
+Phase 4 — SOC Dashboard
+
+Deliverables:
+
+Security metrics
+Attack charts
+Top attackers
+Threat distribution
+Real-time visualizations
+Phase 5 — Threat Intelligence
+
+Deliverables:
+
+IP reputation lookup
+Threat feeds
+IOC matching
+Phase 6 — MITRE ATT&CK Mapping
+
+Deliverables:
+
+Technique mapping
+ATT&CK matrix visualization
+Phase 7 — Timeline Engine
+
+Deliverables:
+
+Attack timeline
+Event correlation
+Phase 8 — ML Engine
+
+Deliverables:
+
+Isolation Forest
+Anomaly scoring
+Suspicious event detection
+Phase 9 — Reporting
+
+Deliverables:
+
+PDF reports
+Threat summaries
+Executive reports
+Phase 10 — Deployment
+
+Deliverables:
+
+Docker Compose
+GitHub
+Cloud Deployment
+Production README
+
+future list i hope:?
+Threat Hunting workspace
+IOC Management
+YARA rule management
+Sigma rule engine
+MITRE ATT&CK Navigator
+ATT&CK Matrix visualization
+CVE Explorer
+Threat Intelligence feeds
+IOC correlation engine
+Network topology visualization
+Attack path graph
+Live SIEM dashboard
+SOAR playbooks
+Case management
+Evidence locker
+Analyst notes
+Asset inventory
+Endpoint inventory
+User behavior analytics (UEBA)
+ML anomaly detection
+Risk scoring engine
+Threat scoring engine
+Threat intelligence enrichment
+GeoIP mapping
+VirusTotal integration
+AbuseIPDB integration
+Shodan integration
+Censys integration
+AI Copilot
+Natural language queries
+Chat with logs
+Threat report generation
+Executive dashboard
+Compliance dashboards (ISO 27001, NIST, PCI DSS)
+Audit logs
+RBAC
+Multi-tenant support
+API management
+Integrations
+Notification center
+Command palette
+Global search
+Session management
+Real-time WebSocket updates
+Live attack animations
+SOC analyst workflow
+Investigation workspace
+Timeline replay
+Forensics page
+Malware analysis page
+Sandbox results
+Threat campaign tracking
+Dark/light theme
+Keyboard shortcuts
+Accessibility
+Enterprise onboarding
+Settings for every module
+
+u also said this:
+✅ Phase 1 — Enterprise Session Management (Finish This First)
+
+Backend
+
+✅ Access Tokens
+✅ Refresh Tokens
+✅ Token Rotation
+✅ Logout API
+⏳ Refresh Token Cleanup
+⏳ Session Revocation
+⏳ Multi-device Sessions
+
+Frontend
+
+⏳ Axios Silent Refresh
+⏳ Session Expiring Modal (2-minute warning)
+⏳ Session Expired Modal
+⏳ Countdown Timer
+⏳ Automatic Logout
+⏳ Retry Failed Requests
+
+Priority: 🔴 Critical
+
+✅ Phase 2 — Detection Engine Expansion
+
+Current:
+
+✅ Brute Force
+✅ Port Scan
+
+Add:
+
+SQL Injection
+XSS
+Command Injection
+Credential Stuffing
+Impossible Travel
+Malware Detection
+DNS Tunneling
+Beaconing
+PowerShell Abuse
+Suspicious File Access
+Lateral Movement
+Ransomware Indicators
+Privilege Escalation
+
+Each detector should remain an independent file under:
+
+backend/app/detection/
+
+Priority: 🔴 Critical
+
+✅ Phase 3 — Threat Scoring Engine
+
+Every alert should include calculated values instead of hardcoded ones.
+
+Example:
+
+{
+    "severity": "Critical",
+    "confidence": 96,
+    "risk_score": 91,
+    "threat_score": 94,
+    "mitre": [
+        "T1110"
+    ]
+}
+
+Scoring should consider:
+
+Number of events
+Frequency
+IOC reputation
+Attack type
+Historical behavior
+
+Priority: 🔴 Critical
+
+✅ Phase 4 — IOC Extraction
+
+Automatically extract:
+
+IPv4 / IPv6
+Domains
+URLs
+File Hashes
+Emails
+Hostnames
+
+These become clickable in the UI for investigations.
+
+Priority: 🔴 Critical
+
+✅ Phase 5 — Threat Intelligence
+
+When clicking an IOC:
+
+8.8.8.8
+
+ThreatEye should query:
+
+VirusTotal
+AbuseIPDB
+GeoIP
+ASN
+WHOIS
+ISP
+Country
+Blacklist Status
+
+This transforms ThreatEye into an investigation platform rather than just a log viewer.
+
+Priority: 🟠 High
+
+✅ Phase 6 — Dashboard Expansion
+
+Current dashboard already looks good.
+
+Enhance with:
+
+🌍 World Attack Map
+MITRE Heatmap
+Threat Trends
+Top Source IPs
+Attack Distribution
+Real-time Alert Stream
+Detection Timeline
+Recent Investigations
+
+Priority: 🟠 High
+
+✅ Phase 7 — Incident Management
+
+This is where the current placeholder buttons become functional.
+
+Block IP
+Create Incident
+Assign Analyst
+Evidence
+Timeline
+Case Notes
+Attachments
+Incident Status
+SOC Workflow
+
+This turns ThreatEye into a SOC case management platform.
+
+Priority: 🟠 High
+
+✅ Phase 8 — Reports
+
+Export:
+
+Executive PDF
+Technical SOC Report
+CSV
+Weekly Summary
+Monthly Summary
+MITRE Coverage Report
+
+Priority: 🟡 Medium
+
+✅ Phase 9 — AI Copilot
+Threat Summary
+Root Cause Analysis
+Investigation Suggestions
+"Explain this alert"
+Chat with Logs
+Detection Recommendations
+
+This should assist analysts, not replace them.
+
+Priority: 🟡 Medium
+
+✅ Phase 10 — Production Polish
+Keyboard Shortcuts
+Accessibility
+Performance Optimizations
+Virtualized Tables
+Lazy Loading
+Responsive Design
+Better Animations
+Error Boundaries
+Skeleton Loaders
+Theme Improvements
+
+Priority: 🟢 Final
+
+🚀 Features I'd Add Beyond the Original Roadmap
+
+To make ThreatEye stand out to recruiters, I'd also add:
+
+1. Live Log Streaming
+WebSockets
+Real-time dashboard updates
+Live alert feed
+2. Detection Rules Engine
+Custom detection rules
+Rule enable/disable
+Rule priority
+3. Asset Inventory
+Endpoints
+Servers
+Devices
+Criticality
+4. User & Role Management
+Admin
+SOC Analyst
+Tier-2 Analyst
+Read-only Auditor
+5. Audit Logs
+
+Track every action:
+
+Login
+Logout
+Alert viewed
+Incident created
+IP blocked
+6. Notification Center
+Toast notifications
+Unread count
+Alert history
+7. Global Search
+
+Search across:
+
+Logs
+Alerts
+Incidents
+IOCs
+Reports
+8. Advanced Filtering
+
+Filter by:
+
+Severity
+MITRE Technique
+Country
+Source IP
+Time Range
+Status
+My Recommendation
+
+Do not leave Session Management half-finished.
+
+Finish Phase 1 completely—including the frontend session experience—before moving to new detection capabilities.
+
+UI/UX:
+Animated Login Button
+Premium entrance animations
+neon effects glowing
+include motion effects, transitions, immersive and interactive, dynamic interactivity response with the user

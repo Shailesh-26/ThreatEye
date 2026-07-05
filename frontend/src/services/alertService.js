@@ -1,11 +1,6 @@
 import api from "./api";
 
-export async function getAlerts() {
-    const token = localStorage.getItem("token");
-    const response = await api.get("/alerts", {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
-}
+export const fetchAlerts=async()=>{
+const res=await api.get("/alerts");
+return res.data;
+};

@@ -6,6 +6,7 @@ import ThreatChart from "../components/dashboard/ThreatChart";
 import { getDashboard } from "../services/dashboardService";
 import StatCard from "../components/cards/StatCard";
 
+
 import RefreshBadge from "../components/common/RefreshBadge";
 
 export default function Dashboard() {

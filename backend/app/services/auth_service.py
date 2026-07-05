@@ -155,7 +155,14 @@ class AuthService:
                 "Refresh token has been revoked"
             )
 
-        if stored_token["expires_at"] < datetime.now(
+        expires_at = stored_token["expires_at"]
+
+        if expires_at.tzinfo is None:
+            expires_at = expires_at.replace(
+                tzinfo=timezone.utc
+            )
+
+        if expires_at < datetime.now(
             timezone.utc
         ):
             raise ValueError(

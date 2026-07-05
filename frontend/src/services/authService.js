@@ -36,6 +36,9 @@ export async function login(
     setSessionExpiry(
         expires_in
     );
+    window.dispatchEvent(
+    new Event("session-updated")
+    );
 
     return response.data;
 }

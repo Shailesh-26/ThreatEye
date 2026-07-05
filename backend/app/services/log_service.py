@@ -35,9 +35,6 @@ class LogService:
                 await db.database.logs.insert_many(logs)
 
             alerts=DetectionEngine.run(logs)
-
-            await AlertService.save_alerts(alerts)
-
             return{
                 "message":"Logs uploaded successfully",
                 "count":len(logs),

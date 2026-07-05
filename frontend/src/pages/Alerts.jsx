@@ -111,9 +111,19 @@ export default function Alerts() {
                                 </div>
 
                                 <div className="flex flex-col items-end gap-4">
-                                    <div className="rounded-full bg-red-500 px-4 py-2 font-bold">
-                                        CRITICAL
-                                    </div>
+                                    <div
+    className={`rounded-full px-4 py-2 text-sm font-bold text-white ${
+        alert.severity === "Critical"
+            ? "bg-red-600"
+            : alert.severity === "High"
+                ? "bg-orange-500"
+                : alert.severity === "Medium"
+                    ? "bg-yellow-500 text-black"
+                    : "bg-emerald-600"
+    }`}
+>
+    {alert.severity.toUpperCase()}
+</div>
 
                                     <button
                                         onClick={() => handleInvestigation(alert)}
@@ -196,9 +206,19 @@ export default function Alerts() {
                                             Severity
                                         </span>
 
-                                        <span className="rounded-full bg-red-500 px-3 py-1 text-xs font-bold">
-                                            {selectedAlert.severity}
-                                        </span>
+                                        <span
+    className={`rounded-full px-3 py-1 text-xs font-bold ${
+        selectedAlert.severity === "Critical"
+            ? "bg-red-600 text-white"
+            : selectedAlert.severity === "High"
+                ? "bg-orange-500 text-white"
+                : selectedAlert.severity === "Medium"
+                    ? "bg-yellow-500 text-black"
+                    : "bg-emerald-600 text-white"
+    }`}
+>
+    {selectedAlert.severity}
+</span>
                                     </div>
 
                                     <div className="flex items-center justify-between">

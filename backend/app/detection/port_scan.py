@@ -1,4 +1,8 @@
 from collections import defaultdict
+from app.services.threat_score_service import (
+    ThreatScoreService
+)
+
 
 class PortScanDetector:
 
@@ -7,8 +11,12 @@ class PortScanDetector:
         grouped = defaultdict(list)
 
         for log in logs:
-            if log.get("event_type") == "port_scan":
-                grouped[log["source_ip"]].append(log)
+            if log.get("event_type") != "port_scan":
+                continue
+
+            grouped[
+                log["source_ip"]
+            ].append(log)
 
         alerts = []
 
@@ -16,17 +24,19 @@ class PortScanDetector:
             if len(entries) < 3:
                 continue
 
+            score = ThreatScoreService.calculate(
+                attack_type="Port Scan",
+                event_count=len(entries)
+            )
+
             alerts.append({
                 "title": "Port Scan Detected",
-                "severity": "High",
                 "source_ip": ip,
                 "count": len(entries),
                 "event": "Reconnaissance",
-                "recommendation": "Investigate reconnaissance activity from this host.",
-                "mitre": "T1046",
-                "confidence": 91,
                 "detected_at": entries[-1]["timestamp"],
-                "icon": "radar"
+                "icon": "radar",
+                **score
             })
 
         return alerts

@@ -1,3 +1,7 @@
+from app.services.threat_score_service import (
+    ThreatScoreService
+)
+
 class BruteForceDetector:
 
     @staticmethod
@@ -9,7 +13,11 @@ class BruteForceDetector:
                 continue
 
             ip = log["source_ip"]
-            failed.setdefault(ip, []).append(log)
+
+            failed.setdefault(
+                ip,
+                []
+            ).append(log)
 
         alerts = []
 
@@ -17,17 +25,19 @@ class BruteForceDetector:
             if len(entries) < 5:
                 continue
 
+            score = ThreatScoreService.calculate(
+                attack_type="Brute Force",
+                event_count=len(entries)
+            )
+
             alerts.append({
                 "title": "Brute Force Attack",
-                "severity": "Critical",
                 "source_ip": ip,
                 "count": len(entries),
                 "event": "Multiple Failed Logins",
-                "recommendation": "Immediately block the source IP and investigate authentication attempts.",
-                "mitre": "T1110",
-                "confidence": 98,
                 "detected_at": entries[-1]["timestamp"],
-                "icon": "shield"
+                "icon": "shield",
+                **score
             })
 
         return alerts

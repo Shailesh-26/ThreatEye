@@ -207,18 +207,18 @@ export default function Alerts() {
                                         </span>
 
                                         <span
-    className={`rounded-full px-3 py-1 text-xs font-bold ${
-        selectedAlert.severity === "Critical"
-            ? "bg-red-600 text-white"
-            : selectedAlert.severity === "High"
-                ? "bg-orange-500 text-white"
-                : selectedAlert.severity === "Medium"
-                    ? "bg-yellow-500 text-black"
-                    : "bg-emerald-600 text-white"
-    }`}
->
-    {selectedAlert.severity}
-</span>
+                                        className={`rounded-full px-3 py-1 text-xs font-bold ${
+                                            selectedAlert.severity === "Critical"
+                                                ? "bg-red-600 text-white"
+                                                : selectedAlert.severity === "High"
+                                                    ? "bg-orange-500 text-white"
+                                                    : selectedAlert.severity === "Medium"
+                                                        ? "bg-yellow-500 text-black"
+                                                        : "bg-emerald-600 text-white"
+                                        }`}
+                                    >
+                                        {selectedAlert.severity}
+                                    </span>
                                     </div>
 
                                     <div className="flex items-center justify-between">
@@ -278,35 +278,86 @@ export default function Alerts() {
                             </div>
 
                             <div className="rounded-xl border border-zinc-800 bg-[#121821] p-5">
-                                <div className="mb-4 flex items-center gap-2">
-                                    <Target size={18} className="text-red-400" />
+    <div className="mb-5 flex items-center gap-2">
+        <Target
+            size={18}
+            className="text-cyan-400"
+        />
 
-                                    <h3 className="font-semibold">
-                                        Detection Timeline
-                                    </h3>
-                                </div>
+        <h3 className="font-semibold">
+            Threat Intelligence
+        </h3>
+    </div>
 
-                                <div className="space-y-4">
-                                    {selectedAlert.timeline.map((event, index) => (
-                                        <div
-                                            key={index}
-                                            className="flex items-start gap-4"
+    <div className="space-y-5">
+        <div className="grid grid-cols-3 gap-4">
+            <div className="rounded-xl bg-[#0d131b] p-4 text-center">
+                <p className="text-xs uppercase tracking-wider text-zinc-500">
+                    Threat
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-red-400">
+                    {selectedAlert.threat_score}
+                </p>
+            </div>
+
+            <div className="rounded-xl bg-[#0d131b] p-4 text-center">
+                <p className="text-xs uppercase tracking-wider text-zinc-500">
+                    Risk
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-orange-400">
+                    {selectedAlert.risk_score}
+                </p>
+            </div>
+
+            <div className="rounded-xl bg-[#0d131b] p-4 text-center">
+                <p className="text-xs uppercase tracking-wider text-zinc-500">
+                    Confidence
+                </p>
+
+                <p className="mt-2 text-2xl font-bold text-emerald-400">
+                    {selectedAlert.confidence}%
+                </p>
+            </div>
+        </div>
+
+        <div>
+            <h4 className="mb-3 font-semibold text-cyan-400">
+                Indicators of Compromise
+            </h4>
+
+            <div className="space-y-4">
+                {Object.entries(selectedAlert.iocs).map(
+                    ([key, values]) => (
+                        <div key={key}>
+                            <p className="mb-2 text-xs uppercase tracking-wider text-zinc-500">
+                                {key}
+                            </p>
+
+                            <div className="flex flex-wrap gap-2">
+                                {values.length === 0 ? (
+                                    <span className="text-sm text-zinc-500">
+                                        —
+                                    </span>
+                                ) : (
+                                    values.map((value) => (
+                                        <span
+                                            key={value}
+                                            className="rounded-lg border border-cyan-500/20 bg-cyan-500/10 px-3 py-1 text-xs text-cyan-300 transition hover:border-cyan-400 hover:bg-cyan-500/20"
                                         >
-                                            <div className="mt-1 h-3 w-3 rounded-full bg-emerald-400" />
-
-                                            <div>
-                                                <p className="font-medium">
-                                                    {event}
-                                                </p>
-
-                                                <p className="text-sm text-zinc-500">
-                                                    Step {index + 1}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    ))}
-                                </div>
+                                            {value}
+                                        </span>
+                                    ))
+                                )}
                             </div>
+                        </div>
+                    )
+                )}
+            </div>
+        </div>
+    </div>
+</div>
 
                             <div className="rounded-xl border border-zinc-800 bg-[#121821] p-5">
                                 <h3 className="mb-3 font-semibold">

@@ -1,7 +1,6 @@
 from collections import defaultdict
-from app.services.threat_score_service import (
-    ThreatScoreService
-)
+from app.services.ioc_extractor import IOCExtractor
+from app.services.threat_score_service import ThreatScoreService
 
 
 class PortScanDetector:
@@ -29,6 +28,12 @@ class PortScanDetector:
                 event_count=len(entries)
             )
 
+            searchable_text = " ".join(
+                str(value)
+                for entry in entries
+                for value in entry.values()
+            )
+
             alerts.append({
                 "title": "Port Scan Detected",
                 "source_ip": ip,
@@ -36,6 +41,7 @@ class PortScanDetector:
                 "event": "Reconnaissance",
                 "detected_at": entries[-1]["timestamp"],
                 "icon": "radar",
+                "iocs": IOCExtractor.extract(searchable_text),
                 **score
             })
 

@@ -33,7 +33,8 @@ class AlertService:
                 "risk_score": alert["risk_score"],
                 "threat_score": alert["threat_score"],
                 "detected_at": alert["detected_at"],
-                "status": "Active"
+                "status": "Active",
+                "iocs": alert["iocs"]
             })
 
         return enriched_alerts

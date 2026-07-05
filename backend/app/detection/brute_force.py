@@ -1,6 +1,6 @@
-from app.services.threat_score_service import (
-    ThreatScoreService
-)
+from app.services.ioc_extractor import IOCExtractor
+from app.services.threat_score_service import ThreatScoreService
+
 
 class BruteForceDetector:
 
@@ -30,6 +30,12 @@ class BruteForceDetector:
                 event_count=len(entries)
             )
 
+            searchable_text = " ".join(
+                str(value)
+                for entry in entries
+                for value in entry.values()
+            )
+
             alerts.append({
                 "title": "Brute Force Attack",
                 "source_ip": ip,
@@ -37,6 +43,7 @@ class BruteForceDetector:
                 "event": "Multiple Failed Logins",
                 "detected_at": entries[-1]["timestamp"],
                 "icon": "shield",
+                "iocs": IOCExtractor.extract(searchable_text),
                 **score
             })
 

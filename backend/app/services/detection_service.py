@@ -1,9 +1,5 @@
 from app.database.mongodb import mongodb
-
-from app.detection.brute_force import (
-    BruteForceDetector
-)
-
+from app.detection.detection_engine import DetectionEngine
 
 class DetectionService:
 
@@ -18,7 +14,7 @@ class DetectionService:
             logs.append(log)
 
         alerts = (
-            BruteForceDetector.detect(
+            DetectionEngine.run(
                 logs
             )
         )

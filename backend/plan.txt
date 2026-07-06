@@ -1,0 +1,6 @@
+✅ Fix Dashboard statistics.
+✅ Refactor IOC extraction to eliminate false hostnames.
+✅ Add XLSX upload support.
+✅ Build the Detection Rules page.
+✅ Implement XSS Detection.
+✅ Continue with the remaining detectors.

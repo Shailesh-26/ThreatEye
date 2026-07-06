@@ -103,7 +103,7 @@ export default function Logs() {
                 </h2>
 
                 <p className="mt-3 text-zinc-400">
-                    Supports CSV, JSON and TXT Syslog files.
+                    Supports CSV, XLSX, JSON and TXT security logs
                 </p>
 
                 <label
@@ -126,7 +126,7 @@ export default function Logs() {
                     <input
                         hidden
                         type="file"
-                        accept=".csv,.json,.txt"
+                        accept=".csv,.xlsx,.json,.txt"
                         onChange={handleBrowse}
                     />
                 </label>

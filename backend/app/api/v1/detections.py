@@ -1,38 +1,51 @@
-from fastapi import (
-    APIRouter,
-    Depends
-)
+from fastapi import APIRouter
 
-from app.core.dependencies import (
-    get_current_user
-)
-
-from app.services.detection_service import (
-    DetectionService
-)
-
-router = APIRouter(
-    prefix="/detections",
-    tags=["Detections"]
-)
+router = APIRouter(prefix="/detections", tags=["Detections"])
 
 
-@router.post("/brute-force")
-async def brute_force_detection(
-    current_user=Depends(
-        get_current_user
-    )
-):
-
-    alerts = (
-        await DetectionService
-        .run_brute_force_detection()
-    )
-
-    return {
-        "alerts_found":
-            len(alerts),
-
-        "alerts":
-            alerts
-    }
+@router.get("/rules")
+async def get_detection_rules():
+    return [
+        {
+            "name": "Brute Force",
+            "status": "Enabled",
+            "severity": "Critical",
+            "mitre": "T1110",
+            "last_run": "Just Now"
+        },
+        {
+            "name": "Port Scan",
+            "status": "Enabled",
+            "severity": "Medium",
+            "mitre": "T1046",
+            "last_run": "Just Now"
+        },
+        {
+            "name": "SQL Injection",
+            "status": "Enabled",
+            "severity": "Critical",
+            "mitre": "T1190",
+            "last_run": "Just Now"
+        },
+        {
+            "name": "Cross Site Scripting",
+            "status": "Coming Soon",
+            "severity": "High",
+            "mitre": "T1059",
+            "last_run": "--"
+        },
+        {
+            "name": "Command Injection",
+            "status": "Coming Soon",
+            "severity": "Critical",
+            "mitre": "T1059",
+            "last_run": "--"
+        },
+        {
+            "name": "Malware",
+            "status": "Coming Soon",
+            "severity": "Critical",
+            "mitre": "T1204",
+            "last_run": "--"
+        }
+    ]

@@ -8,7 +8,7 @@ from app.api.v1.logs import router as logs_router
 from app.api.v1.detections import router as detections_router
 from app.api.v1.alerts import router as alerts_router
 from app.api.v1.dashboard import router as dashboard_router
-
+from app.api.v1.detections import router as detection_router
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.database.mongodb import (
@@ -75,5 +75,10 @@ app.include_router(
 
 app.include_router(
     dashboard_router,
+    prefix="/api/v1"
+)
+
+app.include_router(
+    detection_router,
     prefix="/api/v1"
 )

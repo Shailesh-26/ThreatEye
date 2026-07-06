@@ -1,0 +1,5 @@
+timestamp,source_ip,destination_ip,event_type,message,payload,url
+2026-07-06T12:00:00,192.168.1.55,10.0.0.5,web_request,XSS Attempt,<script>alert('xss')</script>,/login
+2026-07-06T12:00:02,192.168.1.55,10.0.0.5,web_request,Stored XSS,<img src=x onerror=alert(1)>,/profile
+2026-07-06T12:00:04,192.168.1.55,10.0.0.5,web_request,Cookie Theft,javascript:document.cookie,/dashboard
+2026-07-06T12:00:06,192.168.1.55,10.0.0.5,web_request,SVG XSS,<svg onload=alert(1)>,/upload

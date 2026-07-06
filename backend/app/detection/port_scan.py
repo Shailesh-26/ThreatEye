@@ -29,10 +29,9 @@ class PortScanDetector:
             )
 
             searchable_text = " ".join(
-                str(value)
-                for entry in entries
-                for value in entry.values()
-            )
+    IOCExtractor.build_searchable_text(entry)
+    for entry in entries
+)
 
             alerts.append({
                 "title": "Port Scan Detected",

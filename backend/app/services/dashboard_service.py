@@ -1,14 +1,17 @@
 from app.database.mongodb import mongodb
 
-
+from app.detection.detection_engine import DetectionEngine
 class DashboardService:
 
     @staticmethod
     async def get_dashboard_stats():
 
         total_logs = await mongodb.database.logs.count_documents({})
+        logs = await mongodb.database.logs.find().to_list(length=None)
 
-        total_alerts = await mongodb.database.alerts.count_documents({})
+        current_alerts = DetectionEngine.run(logs)
+
+        total_alerts = len(current_alerts)
 
         high_severity_alerts = await mongodb.database.alerts.count_documents(
             {

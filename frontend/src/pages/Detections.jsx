@@ -1,9 +1,24 @@
 import { useEffect, useState } from "react";
 import { getDetectionRules } from "../services/detectionService";
+import { toast } from "sonner";
+import { runDetectionRule } from "../services/detectionService";
 
 export default function Detections() {
   const [rules, setRules] = useState([]);
+  const handleRun = async (rule) => {
+  try {
+    const result = await runDetectionRule(rule.id);
 
+    toast.success(`${rule.name} executed successfully`, {
+    description: `${result.alerts} alert(s) generated.`,
+});
+  } catch (err) {
+    toast.error("Detector execution failed", {
+    description:
+        err.response?.data?.detail || "Unknown error",
+});
+  }
+};
   useEffect(() => {
     getDetectionRules().then(setRules);
   }, []);
@@ -21,12 +36,14 @@ export default function Detections() {
         <table className="w-full">
           <thead className="bg-zinc-800">
             <tr className="text-left">
-              <th className="p-4">Rule</th>
-              <th>Status</th>
-              <th>Severity</th>
-              <th>MITRE</th>
-              <th>Last Run</th>
-            </tr>
+  <th className="p-4">Rule</th>
+  <th>Status</th>
+  <th>Severity</th>
+  <th>MITRE</th>
+  <th>Last Run</th>
+  <th>Version</th>
+  <th className="text-center">Actions</th>
+</tr>
           </thead>
 
           <tbody>
@@ -40,12 +57,12 @@ export default function Detections() {
                 <td>
                   <span
                     className={`rounded-full px-3 py-1 text-xs ${
-                      rule.status === "Enabled"
+                      rule.enabled
                         ? "bg-emerald-500/20 text-emerald-400"
                         : "bg-yellow-500/20 text-yellow-400"
                     }`}
                   >
-                    {rule.status}
+                    {rule.enabled ? "Enabled" : "Coming Soon"}
                   </span>
                 </td>
 
@@ -54,6 +71,25 @@ export default function Detections() {
                 <td>{rule.mitre}</td>
 
                 <td>{rule.last_run}</td>
+<td>{rule.version}</td>
+
+<td className="text-center">
+  {rule.enabled ? (
+    <button
+      onClick={() => handleRun(rule)}
+      className="rounded-lg bg-emerald-600 px-3 py-1 text-sm font-medium transition hover:bg-emerald-500"
+    >
+      Run
+    </button>
+  ) : (
+    <button
+      disabled
+      className="cursor-not-allowed rounded-lg bg-zinc-800 px-3 py-1 text-sm text-zinc-500"
+    >
+      Coming Soon
+    </button>
+  )}
+</td>
               </tr>
             ))}
           </tbody>

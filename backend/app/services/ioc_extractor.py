@@ -32,7 +32,7 @@ class IOCExtractor:
     )
 
     HOSTNAME_REGEX = re.compile(
-        r"\b[A-Za-z][A-Za-z0-9-]{2,62}\b"
+    r"\b(?:[A-Za-z0-9-]{1,63}\.)+[A-Za-z]{2,}\b"
     )
 
     RESERVED_WORDS = {
@@ -55,7 +55,26 @@ class IOCExtractor:
         "active",
         "timestamp"
     }
+    @classmethod
+    def build_searchable_text(cls, log: dict) -> str:
+        fields = [
+            "source_ip",
+            "destination_ip",
+            "url",
+            "payload",
+            "message",
+            "hostname",
+            "command",
+            "query",
+            "email",
+            "user_agent"
+        ]
 
+        return " ".join(
+            str(log.get(field, ""))
+            for field in fields
+            if log.get(field)
+        )
     @classmethod
     def extract(
         cls,
@@ -95,27 +114,7 @@ class IOCExtractor:
             )
         )
 
-        hostnames = []
-
-        for candidate in cls.HOSTNAME_REGEX.findall(text):
-            lower = candidate.lower()
-
-            if lower in cls.RESERVED_WORDS:
-                continue
-
-            if candidate.isdigit():
-                continue
-
-            if candidate in hashes:
-                continue
-
-            if candidate in ips:
-                continue
-
-            if "." in candidate:
-                continue
-
-            hostnames.append(candidate)
+        hostnames = domains.copy()
 
         hostnames = sorted(set(hostnames))
 

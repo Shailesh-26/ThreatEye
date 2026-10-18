@@ -3,7 +3,7 @@ from collections import defaultdict
 
 from app.services.ioc_extractor import IOCExtractor
 from app.services.threat_score_service import ThreatScoreService
-
+from app.services.evidence_service import EvidenceService
 
 class SQLInjectionDetector:
 
@@ -72,21 +72,32 @@ class SQLInjectionDetector:
                 event_count=total_matches
             )
 
+            evidence = EvidenceService.build(
+                entries,
+                cls.PATTERNS
+            )
+
             searchable_text = " ".join(
     IOCExtractor.build_searchable_text(entry)
     for entry in entries
 )
 
             alerts.append({
-                "title": "SQL Injection Attempt",
-                "source_ip": ip,
-                "count": len(entries),
-                "event": "SQL Injection",
-                "pattern_matches": total_matches,
-                "detected_at": entries[-1]["timestamp"],
-                "icon": "database",
-                "iocs": IOCExtractor.extract(searchable_text),
-                **score
-            })
+    "title": "SQL Injection Attempt",
+    "source_ip": ip,
+    "count": len(entries),
+    "event": "SQL Injection",
+    "pattern_matches": total_matches,
+    "detected_at": entries[-1]["timestamp"],
+    "icon": "database",
+    "iocs": IOCExtractor.extract(searchable_text),
+
+    "matched_patterns": evidence["matched_patterns"],
+    "affected_assets": evidence["affected_assets"],
+    "evidence": evidence["evidence"],
+    "timeline": evidence["timeline"],
+
+    **score
+})
 
         return alerts

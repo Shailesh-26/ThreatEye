@@ -74,7 +74,7 @@ class SQLInjectionDetector:
 
             evidence = EvidenceService.build(
                 entries,
-                cls.PATTERNS
+                cls.SQL_PATTERNS,
             )
 
             searchable_text = " ".join(
@@ -88,7 +88,7 @@ class SQLInjectionDetector:
     "count": len(entries),
     "event": "SQL Injection",
     "pattern_matches": total_matches,
-    "detected_at": entries[-1]["timestamp"],
+    "detected_at": entries[-1].get("timestamp"),
     "icon": "database",
     "iocs": IOCExtractor.extract(searchable_text),
 

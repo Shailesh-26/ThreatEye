@@ -1,27 +1,12 @@
-from app.detection.brute_force import BruteForceDetector
-from app.detection.port_scan import PortScanDetector
-from app.detection.sql_injection import SQLInjectionDetector
-from app.detection.xss import XSSDetector
+from app.detection.detector_registry import ALL_DETECTORS
+
+
 class DetectionEngine:
+    """Runs every registered detector over the logs and collects the alerts."""
 
     @staticmethod
     def run(logs):
-
         alerts = []
-
-        alerts.extend(
-            BruteForceDetector.detect(logs)
-        )
-
-        alerts.extend(
-            PortScanDetector.detect(logs)
-        )
-
-        alerts.extend(
-            SQLInjectionDetector.detect(logs)
-        )
-
-        alerts.extend(
-            XSSDetector.detect(logs)
-        )
+        for detector in ALL_DETECTORS:
+            alerts.extend(detector.detect(logs))
         return alerts

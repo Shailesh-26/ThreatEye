@@ -1,106 +1,126 @@
+"""
+Turns "how much happened" into scores a human can compare.
+
+threat_score (0-100): how dangerous the activity looks.
+    = base + weight * log2(event_count) + bonus
+    log2 means each DOUBLING of events adds `weight` points, so 5 attempts
+    and 500 attempts get different scores instead of both hitting 100.
+confidence (0-99): how sure we are it's really an attack.
+risk_score (0-100): 70% threat + 30% confidence - used to sort alerts.
+
+These are simple, explainable rules - not machine learning.
+"""
+
+import math
+
+SEVERITY_THRESHOLDS = [
+    (90, "Critical"),
+    (70, "High"),
+    (45, "Medium"),
+    (0, "Low"),
+]
+
 ATTACK_PROFILES = {
-    "Brute Force": {
+    "brute_force": {
         "mitre": "T1110",
-        "base_score": 85,
-        "weight": 3,
+        "mitre_name": "Brute Force",
+        "base_score": 50,
+        "weight": 8,
+        "base_confidence": 60,
+        "typical_severity": "High",
         "recommendation": (
-            "Investigate repeated authentication failures. "
-            "Consider enabling account lockout policies, MFA and "
-            "blocking the attacking source."
-        )
+            "Check whether any targeted account logged in successfully. "
+            "Enable account lockout and MFA, and block the source IP if it is not trusted."
+        ),
     },
-
-    "Port Scan": {
+    "port_scan": {
         "mitre": "T1046",
-        "base_score": 55,
-        "weight": 2,
+        "mitre_name": "Network Service Discovery",
+        "base_score": 35,
+        "weight": 6,
+        "base_confidence": 55,
+        "typical_severity": "Medium",
         "recommendation": (
-            "Investigate the scanning source and verify whether "
-            "network reconnaissance is authorized."
-        )
+            "Confirm whether the scan was authorized (e.g. an internal security tool). "
+            "If not, block the source and review which open ports were exposed."
+        ),
     },
-
-    "SQL Injection": {
+    "sql_injection": {
         "mitre": "T1190",
-        "base_score": 90,
-        "weight": 3,
+        "mitre_name": "Exploit Public-Facing Application",
+        "base_score": 60,
+        "weight": 8,
+        "base_confidence": 65,
+        "typical_severity": "High",
         "recommendation": (
-            "Inspect affected web applications immediately. "
-            "Validate inputs and enable WAF protection."
-        )
+            "Inspect the targeted endpoints and database logs for unexpected queries. "
+            "Use parameterized queries and enable WAF rules for SQL injection."
+        ),
     },
-
-    "Cross Site Scripting": {
-        "mitre": "T1059",
-        "base_score": 82,
-        "weight": 2,
+    "xss": {
+        "mitre": "T1059.007",
+        "mitre_name": "Command and Scripting Interpreter: JavaScript",
+        "base_score": 55,
+        "weight": 7,
+        "base_confidence": 60,
+        "typical_severity": "Medium",
         "recommendation": (
-            "Validate user supplied input and encode all HTML output."
-        )
+            "Check whether the payload was stored or reflected to other users. "
+            "Encode all HTML output and add a Content-Security-Policy header."
+        ),
     },
-
-    "Malware": {
-        "mitre": "T1204",
-        "base_score": 95,
-        "weight": 4,
-        "recommendation": (
-            "Immediately isolate the affected endpoint and begin malware analysis."
-        )
-    }
 }
+
+DEFAULT_PROFILE = {
+    "mitre": "Unknown",
+    "mitre_name": "Unknown",
+    "base_score": 40,
+    "weight": 5,
+    "base_confidence": 50,
+    "typical_severity": "Medium",
+    "recommendation": "Further investigation required.",
+}
+
+
+def severity_for(score: int) -> str:
+    for minimum, label in SEVERITY_THRESHOLDS:
+        if score >= minimum:
+            return label
+    return "Low"
 
 
 class ThreatScoreService:
 
     @staticmethod
+    def profile(detector_id: str) -> dict:
+        return ATTACK_PROFILES.get(detector_id, DEFAULT_PROFILE)
+
+    @staticmethod
     def calculate(
-        attack_type: str,
-        event_count: int
-    ):
-        profile = ATTACK_PROFILES.get(
-            attack_type,
-            {
-                "mitre": "Unknown",
-                "base_score": 50,
-                "weight": 1,
-                "recommendation": "Further investigation required."
-            }
-        )
+        detector_id: str,
+        event_count: int,
+        threat_bonus: int = 0,
+        confidence_bonus: int = 0,
+    ) -> dict:
+        profile = ThreatScoreService.profile(detector_id)
+        growth = math.log2(max(event_count, 1))
 
         threat_score = min(
-            profile["base_score"] +
-            (event_count * profile["weight"]),
-            100
+            100,
+            round(profile["base_score"] + profile["weight"] * growth + threat_bonus),
         )
-
         confidence = min(
-            70 +
-            (event_count * profile["weight"]),
-            99
+            99,
+            round(profile["base_confidence"] + 8 * growth + confidence_bonus),
         )
-
-        risk_score = round(
-            (threat_score * 0.6) +
-            (confidence * 0.4)
-        )
-
-        if threat_score >= 95:
-            severity = "Critical"
-
-        elif threat_score >= 80:
-            severity = "High"
-
-        elif threat_score >= 60:
-            severity = "Medium"
-
-        else:
-            severity = "Low"
+        risk_score = round(threat_score * 0.7 + confidence * 0.3)
 
         return {
-            "severity": severity,
+            "severity": severity_for(threat_score),
+            "threat_score": threat_score,
             "confidence": confidence,
             "risk_score": risk_score,
-            "threat_score": threat_score,
             "mitre": profile["mitre"],
-            "recommendation": profile["recommendation"]
+            "mitre_name": profile["mitre_name"],
+            "recommendation": profile["recommendation"],
         }

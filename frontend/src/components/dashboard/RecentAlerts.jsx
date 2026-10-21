@@ -157,7 +157,7 @@ export default function RecentAlerts() {
 
                                 <AlertRow
 
-                                    key={alert._id}
+                                    key={alert.id}
 
                                     alert={alert}
 
@@ -175,4 +175,4 @@ export default function RecentAlerts() {
 
     );
 
-}
+}

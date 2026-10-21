@@ -1,103 +1,36 @@
+"""
+SQL injection: request data containing SQL syntax an attacker would use to
+break out of a query (e.g. ' OR '1'='1, UNION SELECT, ; DROP TABLE).
+
+Patterns are written to need SQL *structure*, not single characters, so a
+URL like /docs#install or a message containing "--" is not flagged.
+"""
+
 import re
-from collections import defaultdict
 
-from app.services.ioc_extractor import IOCExtractor
-from app.services.threat_score_service import ThreatScoreService
-from app.services.evidence_service import EvidenceService
+from app.detection.base import PatternDetector
 
-class SQLInjectionDetector:
+I = re.IGNORECASE
 
-    SQL_PATTERNS = [
-        re.compile(r"union\s+select", re.IGNORECASE),
-        re.compile(r"or\s+1=1", re.IGNORECASE),
-        re.compile(r"'\s*or\s*'1'\s*=\s*'1", re.IGNORECASE),
-        re.compile(r'information_schema', re.IGNORECASE),
-        re.compile(r'xp_cmdshell', re.IGNORECASE),
-        re.compile(r'benchmark\s*\(', re.IGNORECASE),
-        re.compile(r'sleep\s*\(', re.IGNORECASE),
-        re.compile(r'waitfor\s+delay', re.IGNORECASE),
-        re.compile(r';\s*(drop|delete|insert|update)', re.IGNORECASE),
-        re.compile(r'/\*.*?\*/', re.IGNORECASE),
-        re.compile(r'--'),
-        re.compile(r'#')
+
+class SQLInjectionDetector(PatternDetector):
+    id = "sql_injection"
+    name = "SQL Injection"
+    title = "SQL Injection Attempt"
+    event = "SQL Injection"
+    icon = "database"
+    version = "2.0.0"
+    description = "Regex rules for SQL injection techniques in URLs, payloads and queries."
+
+    PATTERNS = [
+        ("Tautology (OR 1=1)", re.compile(r"\b(?:or|and)\s+(\d+)\s*=\s*\1\b", I)),
+        ("Quoted tautology (' OR 'a'='a)", re.compile(r"'\s*(?:or|and)\s+'([^']*)'\s*=\s*'\1", I)),
+        ("UNION SELECT", re.compile(r"\bunion\b(?:\s+all)?\s+select\b", I)),
+        ("Stacked query (; DROP ...)", re.compile(r";\s*(?:drop|delete|insert|update|truncate|alter)\s", I)),
+        ("Schema enumeration", re.compile(r"\binformation_schema\b|\bpg_catalog\b|\bsysobjects\b", I)),
+        ("Time-based blind (SLEEP)", re.compile(r"\b(?:sleep|benchmark|pg_sleep)\s*\(|\bwaitfor\s+delay\b", I)),
+        ("Quote followed by comment ('--)", re.compile(r"'\s*(?:--|#|/\*)")),
+        ("Command execution (xp_cmdshell)", re.compile(r"\bxp_cmdshell\b", I)),
     ]
 
-    SEARCH_FIELDS = [
-        "message",
-        "payload",
-        "request",
-        "query",
-        "url",
-        "command"
-    ]
-
-    @classmethod
-    def detect(cls, logs):
-
-        grouped = defaultdict(list)
-
-        for log in logs:
-
-            searchable = " ".join(
-                str(log.get(field, ""))
-                for field in cls.SEARCH_FIELDS
-            )
-
-            matches = sum(
-                1
-                for pattern in cls.SQL_PATTERNS
-                if pattern.search(searchable)
-            )
-
-            if matches == 0:
-                continue
-
-            source_ip = log.get("source_ip", "Unknown")
-
-            log["_sql_match_count"] = matches
-
-            grouped[source_ip].append(log)
-
-        alerts = []
-
-        for ip, entries in grouped.items():
-
-            total_matches = sum(
-                entry["_sql_match_count"]
-                for entry in entries
-            )
-
-            score = ThreatScoreService.calculate(
-                attack_type="SQL Injection",
-                event_count=total_matches
-            )
-
-            evidence = EvidenceService.build(
-                entries,
-                cls.SQL_PATTERNS,
-            )
-
-            searchable_text = " ".join(
-    IOCExtractor.build_searchable_text(entry)
-    for entry in entries
-)
-
-            alerts.append({
-    "title": "SQL Injection Attempt",
-    "source_ip": ip,
-    "count": len(entries),
-    "event": "SQL Injection",
-    "pattern_matches": total_matches,
-    "detected_at": entries[-1].get("timestamp"),
-    "icon": "database",
-    "iocs": IOCExtractor.extract(searchable_text),
-
-    "matched_patterns": evidence["matched_patterns"],
-    "affected_assets": evidence["affected_assets"],
-    "evidence": evidence["evidence"],
-    "timeline": evidence["timeline"],
-
-    **score
-})
-
-        return alerts
+    SEARCH_FIELDS = ["url", "payload", "query", "request", "command", "message"]

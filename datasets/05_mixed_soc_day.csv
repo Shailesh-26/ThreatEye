@@ -1,0 +1,135 @@
+timestamp,source_ip,destination_ip,destination_port,event_type,username,url,payload,user_agent,status,message
+2026-10-15 08:00:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 08:13:37,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 08:15:34,192.168.1.20,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:17:33,192.168.1.24,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:30:00,192.168.1.22,10.0.0.5,,web_request,,/docs#configuration,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Docs page with anchor
+2026-10-15 08:37:00,192.168.1.23,10.0.0.5,,web_request,,/search?q=c%23+tutorial,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Searched for C# tutorial
+2026-10-15 08:40:21,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 08:44:00,192.168.1.24,10.0.0.5,,app_event,,,,,ok,Nightly build -- all tests passed
+2026-10-15 08:45:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 08:47:49,192.168.1.24,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:51:00,192.168.1.20,10.0.0.5,,web_request,,/profile/avatar,<img src='/images/avatar.png' alt='profile photo'>,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,User updated profile picture
+2026-10-15 08:55:27,192.168.1.20,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:58:00,192.168.1.21,10.0.0.5,,web_request,,/products?sort=price&order=asc,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Sorted product list
+2026-10-15 09:02:50,192.168.1.21,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:05:00,192.168.1.22,10.0.0.5,,web_request,,/blog?title=evaluate(your)+options,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Blog search
+2026-10-15 09:05:00,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:05:20,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:05:40,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:06:10,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 09:15:00,203.0.113.50,10.0.0.5,21,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:02,203.0.113.50,10.0.0.5,22,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:04,203.0.113.50,10.0.0.5,23,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:06,203.0.113.50,10.0.0.5,25,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:08,203.0.113.50,10.0.0.5,53,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:10,203.0.113.50,10.0.0.5,80,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:12,203.0.113.50,10.0.0.5,110,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:14,203.0.113.50,10.0.0.5,135,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:16,203.0.113.50,10.0.0.5,139,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:18,203.0.113.50,10.0.0.5,143,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:20,203.0.113.50,10.0.0.5,443,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:22,203.0.113.50,10.0.0.5,445,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:24,203.0.113.50,10.0.0.5,993,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:26,203.0.113.50,10.0.0.5,995,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:15:28,203.0.113.50,10.0.0.5,1433,connection_attempt,,,,,denied,Connection attempt
+2026-10-15 09:16:34,192.168.1.24,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:20:00,203.0.113.50,10.0.0.5,,login_failed,root,,,,failed,SSH: invalid password
+2026-10-15 09:20:09,203.0.113.50,10.0.0.5,,login_failed,admin,,,,failed,SSH: invalid password
+2026-10-15 09:20:18,203.0.113.50,10.0.0.5,,login_failed,ubuntu,,,,failed,SSH: invalid password
+2026-10-15 09:20:27,203.0.113.50,10.0.0.5,,login_failed,root,,,,failed,SSH: invalid password
+2026-10-15 09:20:36,203.0.113.50,10.0.0.5,,login_failed,pi,,,,failed,SSH: invalid password
+2026-10-15 09:20:45,203.0.113.50,10.0.0.5,,login_failed,admin,,,,failed,SSH: invalid password
+2026-10-15 09:20:54,203.0.113.50,10.0.0.5,,login_failed,root,,,,failed,SSH: invalid password
+2026-10-15 09:21:03,203.0.113.50,10.0.0.5,,login_failed,oracle,,,,failed,SSH: invalid password
+2026-10-15 09:21:12,203.0.113.50,10.0.0.5,,login_failed,root,,,,failed,SSH: invalid password
+2026-10-15 09:21:21,203.0.113.50,10.0.0.5,,login_failed,admin,,,,failed,SSH: invalid password
+2026-10-15 09:24:37,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 09:30:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 09:31:28,192.168.1.24,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:32:16,192.168.1.24,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:32:56,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 09:38:02,192.168.1.21,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:38:38,192.168.1.21,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:12:50,192.168.1.23,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:15:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 10:32:09,192.168.1.24,10.0.0.5,,web_request,,/profile,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:43:15,192.168.1.22,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:00:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 11:00:00,198.51.100.91,10.0.0.5,,web_request,,/login,username=admin' OR '1'='1&password=x,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 11:00:20,198.51.100.91,10.0.0.5,,web_request,,"/products?id=1 UNION SELECT username,password FROM users",,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 11:00:40,198.51.100.91,10.0.0.5,,web_request,,/products?id=5,id=5; DROP TABLE orders; --,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 11:22:27,192.168.1.21,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:41:16,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 11:44:09,192.168.1.21,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:45:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 11:49:11,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 11:57:58,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 12:04:21,192.168.1.21,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:09:38,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 12:22:50,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 12:24:33,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 12:27:00,192.168.1.20,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 12:28:20,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 12:35:27,192.168.1.20,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:37:22,192.168.1.22,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:46:03,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 12:47:31,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 12:48:51,192.168.1.20,10.0.0.5,,web_request,,/search?q=wireless+mouse,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:53:34,192.168.1.20,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:53:44,192.168.1.20,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:55:23,192.168.1.21,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:55:28,192.168.1.22,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:57:00,192.168.1.20,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 13:02:45,192.168.1.23,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:04:39,192.168.1.24,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:05:21,192.168.1.20,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:13:49,192.168.1.20,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:16:18,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 13:16:42,192.168.1.23,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:17:41,192.168.1.24,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:30:42,192.168.1.20,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 13:40:25,192.168.1.20,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 13:40:46,192.168.1.22,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:47:54,192.168.1.20,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:00:00,198.51.100.120,10.0.0.5,,web_request,,/search?q=<script>alert(1)</script>,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Web request
+2026-10-15 14:00:30,198.51.100.120,10.0.0.5,,web_request,,/comments,<img src=x onerror=alert(document.cookie)>,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Web request
+2026-10-15 14:06:16,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 14:09:09,192.168.1.24,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:14:19,192.168.1.21,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:32:43,192.168.1.21,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:33:59,192.168.1.20,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:39:58,192.168.1.21,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:56:01,192.168.1.24,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:59:48,192.168.1.22,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:05:27,192.168.1.22,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:10:19,192.168.1.20,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:15:00,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 15:21:04,192.168.1.22,10.0.0.5,,web_request,,/search?q=wireless+mouse,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:22:02,192.168.1.22,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 15:23:24,192.168.1.21,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:36:18,192.168.1.22,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:50:29,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 15:52:03,192.168.1.23,10.0.0.5,,web_request,,/docs#install,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:29:22,192.168.1.20,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 16:30:00,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:30:12,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:30:24,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:30:36,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:30:48,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:30:53,192.168.1.21,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:31:00,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:31:12,203.0.113.10,10.0.0.5,,login_failed,anita,,,,failed,Invalid password
+2026-10-15 16:32:00,203.0.113.10,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 16:54:26,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 16:59:31,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 17:00:14,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 17:03:49,192.168.1.23,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:11:18,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 17:12:18,192.168.1.24,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 17:13:21,192.168.1.23,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 17:13:26,192.168.1.22,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:14:36,192.168.1.21,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:19:31,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 17:34:31,192.168.1.20,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:35:31,192.168.1.21,10.0.0.5,80,connection,,,,,allowed,HTTPS session

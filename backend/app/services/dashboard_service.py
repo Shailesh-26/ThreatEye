@@ -1,58 +1,31 @@
-from app.database.mongodb import mongodb
+from collections import Counter
 
+from app.database.mongodb import mongodb
+from app.detection.base import FAILED_LOGIN_EVENTS, SUCCESS_LOGIN_EVENTS, event_type
 from app.detection.detection_engine import DetectionEngine
+
+
 class DashboardService:
 
     @staticmethod
     async def get_dashboard_stats():
+        logs = await mongodb.database.logs.find({}, {"_id": 0}).to_list(length=None)
 
-        total_logs = await mongodb.database.logs.count_documents({})
-        logs = await mongodb.database.logs.find().to_list(length=None)
-
-        current_alerts = DetectionEngine.run(logs)
-
-        total_alerts = len(current_alerts)
-
-        high_severity_alerts = await mongodb.database.alerts.count_documents(
-            {
-                "severity": "High"
-            }
-        )
-
-        logs_cursor = mongodb.database.logs.find()
-
-        unique_ips = set()
-
-        failed_logins = 0
-
-        successful_logins = 0
-
-        port_scan_events = 0
-
-        async for log in logs_cursor:
-
-            ip = log.get("source_ip")
-
-            if ip:
-                unique_ips.add(ip)
-
-            event = log.get("event_type")
-
-            if event == "login_failed":
-                failed_logins += 1
-
-            elif event == "login_success":
-                successful_logins += 1
-
-            elif event == "port_scan":
-                port_scan_events += 1
+        alerts = DetectionEngine.run(logs)
+        severity_counts = Counter(alert["severity"] for alert in alerts)
+        events = Counter(event_type(log) for log in logs)
 
         return {
-            "total_logs": total_logs,
-            "total_alerts": total_alerts,
-            "high_severity_alerts": high_severity_alerts,
-            "unique_source_ips": len(unique_ips),
-            "failed_logins": failed_logins,
-            "successful_logins": successful_logins,
-            "port_scan_events": port_scan_events
+            "total_logs": len(logs),
+            "total_alerts": len(alerts),
+            "high_severity_alerts": severity_counts["High"] + severity_counts["Critical"],
+            "alerts_by_severity": {
+                level: severity_counts[level]
+                for level in ("Critical", "High", "Medium", "Low")
+            },
+            "alerts_by_type": dict(Counter(alert["detector_id"] for alert in alerts)),
+            "unique_source_ips": len({log.get("source_ip") for log in logs if log.get("source_ip")}),
+            "failed_logins": sum(events[name] for name in FAILED_LOGIN_EVENTS),
+            "successful_logins": sum(events[name] for name in SUCCESS_LOGIN_EVENTS),
+            "port_scan_events": events["port_scan"],
         }

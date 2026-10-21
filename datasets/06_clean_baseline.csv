@@ -1,0 +1,89 @@
+timestamp,source_ip,destination_ip,destination_port,event_type,username,url,payload,user_agent,status,message
+2026-10-15 08:00:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 08:01:15,192.168.1.20,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:01:29,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 08:03:55,192.168.1.23,10.0.0.5,,web_request,,/docs#install,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:07:22,192.168.1.22,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:23:49,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 08:25:48,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 08:41:03,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 08:45:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 08:56:37,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 09:00:00,192.168.1.30,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:00:24,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 09:05:00,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:05:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:05:20,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:05:40,192.168.1.20,10.0.0.5,,login_failed,priya,,,,failed,Invalid password
+2026-10-15 09:06:10,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 09:10:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:13:39,192.168.1.21,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:15:00,192.168.1.30,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:20:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:25:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:30:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 09:30:00,192.168.1.30,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:35:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:40:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:41:08,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:45:00,192.168.1.30,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 09:48:37,192.168.1.20,10.0.0.5,,web_request,,/profile,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:50:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:51:05,192.168.1.20,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:55:00,192.168.1.30,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 09:59:03,192.168.1.24,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:00:00,192.168.1.22,10.0.0.5,,web_request,,/docs#configuration,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Docs page with anchor
+2026-10-15 10:07:00,192.168.1.23,10.0.0.5,,web_request,,/search?q=c%23+tutorial,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Searched for C# tutorial
+2026-10-15 10:14:00,192.168.1.24,10.0.0.5,,app_event,,,,,ok,Nightly build -- all tests passed
+2026-10-15 10:15:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 10:17:29,192.168.1.24,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:19:03,192.168.1.21,10.0.0.5,,web_request,,/search?q=wireless+mouse,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:21:00,192.168.1.20,10.0.0.5,,web_request,,/profile/avatar,<img src='/images/avatar.png' alt='profile photo'>,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,User updated profile picture
+2026-10-15 10:28:00,192.168.1.21,10.0.0.5,,web_request,,/products?sort=price&order=asc,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Sorted product list
+2026-10-15 10:35:00,192.168.1.22,10.0.0.5,,web_request,,/blog?title=evaluate(your)+options,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Blog search
+2026-10-15 10:39:53,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 10:42:39,192.168.1.21,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 10:46:05,192.168.1.24,10.0.0.5,80,connection,,,,,allowed,HTTPS session
+2026-10-15 10:56:34,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 11:00:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 11:29:23,192.168.1.23,10.0.0.5,,web_request,,/profile,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:30:09,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 11:33:48,192.168.1.20,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 11:40:47,192.168.1.20,10.0.0.5,,web_request,,/docs#install,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:45:00,192.168.1.45,10.0.0.5,,login_failed,kiran,,,,failed,Invalid password
+2026-10-15 12:01:52,192.168.1.22,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:03:55,192.168.1.23,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:21:11,192.168.1.22,10.0.0.5,,web_request,,/profile,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:29:51,192.168.1.20,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 12:31:23,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 12:36:34,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 13:04:18,192.168.1.22,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:07:44,192.168.1.22,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:12:36,192.168.1.23,10.0.0.5,,login_success,vikram,,,,success,User logged in
+2026-10-15 13:29:48,192.168.1.21,10.0.0.5,,web_request,,/docs#install,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:40:28,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 13:45:14,192.168.1.20,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:54:29,192.168.1.22,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:03:32,192.168.1.23,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:13:30,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 14:44:22,192.168.1.21,10.0.0.5,,web_request,,/search?q=wireless+mouse,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:47:47,192.168.1.23,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 14:51:38,192.168.1.22,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 14:58:09,192.168.1.23,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:06:09,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 15:07:38,192.168.1.24,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 15:10:45,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 15:16:38,192.168.1.23,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:23:41,192.168.1.21,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:28:47,192.168.1.23,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:38:46,192.168.1.20,10.0.0.5,,web_request,,/docs#install,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:39:21,192.168.1.22,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:47:32,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 16:19:31,192.168.1.20,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:36:56,192.168.1.24,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:39:09,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 17:02:56,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 17:04:06,192.168.1.22,10.0.0.5,,web_request,,/search?q=wireless+mouse,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:18:06,192.168.1.22,10.0.0.5,,login_success,anita,,,,success,User logged in
+2026-10-15 17:36:59,192.168.1.23,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 17:59:54,192.168.1.21,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served

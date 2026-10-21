@@ -1,0 +1,38 @@
+timestamp,source_ip,destination_ip,destination_port,event_type,username,url,payload,user_agent,status,message
+2026-10-15 08:00:07,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 08:15:15,192.168.1.22,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 08:43:59,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 08:46:54,192.168.1.21,10.0.0.5,,login_success,rahul,,,,success,User logged in
+2026-10-15 08:55:24,192.168.1.22,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 09:00:00,192.168.1.22,10.0.0.5,,web_request,,/docs#configuration,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Docs page with anchor
+2026-10-15 09:07:00,192.168.1.23,10.0.0.5,,web_request,,/search?q=c%23+tutorial,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Searched for C# tutorial
+2026-10-15 09:14:00,192.168.1.24,10.0.0.5,,app_event,,,,,ok,Nightly build -- all tests passed
+2026-10-15 09:21:00,192.168.1.20,10.0.0.5,,web_request,,/profile/avatar,<img src='/images/avatar.png' alt='profile photo'>,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,User updated profile picture
+2026-10-15 09:28:00,192.168.1.21,10.0.0.5,,web_request,,/products?sort=price&order=asc,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Sorted product list
+2026-10-15 09:35:00,192.168.1.22,10.0.0.5,,web_request,,/blog?title=evaluate(your)+options,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Blog search
+2026-10-15 09:49:10,192.168.1.24,10.0.0.5,,web_request,,/,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 10:00:00,203.0.113.66,10.0.0.5,,web_request,,/login,username=admin' OR '1'='1&password=x,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 10:00:20,203.0.113.66,10.0.0.5,,web_request,,"/products?id=1 UNION SELECT username,password FROM users",,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 10:00:40,203.0.113.66,10.0.0.5,,web_request,,/products?id=5,id=5; DROP TABLE orders; --,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 10:01:00,203.0.113.66,10.0.0.5,,web_request,,/search,q=test' AND SLEEP(5)--,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 10:01:20,203.0.113.66,10.0.0.5,,web_request,,/products?id=1%20UNION%20SELECT%20table_name%20FROM%20information_schema.tables,,sqlmap/1.8.4#stable (https://sqlmap.org),500,Web request
+2026-10-15 11:00:02,192.168.1.21,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 11:05:42,192.168.1.24,10.0.0.5,,login_success,meera,,,,success,User logged in
+2026-10-15 11:07:07,192.168.1.22,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:16:43,192.168.1.21,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:18:56,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 12:26:33,192.168.1.23,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 12:41:59,192.168.1.20,10.0.0.5,,login_success,priya,,,,success,User logged in
+2026-10-15 12:43:06,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 13:40:49,192.168.1.24,10.0.0.5,,web_request,,/blog/getting-started,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 13:46:28,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 14:18:12,192.168.1.24,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 15:01:34,192.168.1.21,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:20:13,192.168.1.21,10.0.0.5,,web_request,,/products?id=12,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 15:21:35,192.168.1.22,10.0.0.5,443,connection,,,,,allowed,HTTPS session
+2026-10-15 15:57:30,192.168.1.21,10.0.0.5,,web_request,,/dashboard,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:16:32,192.168.1.22,10.0.0.5,,web_request,,/login,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:19:14,192.168.1.20,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:39:55,192.168.1.24,10.0.0.5,,web_request,,/cart,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served
+2026-10-15 16:45:00,198.51.100.91,10.0.0.5,,web_request,,/login,username=admin'--&password=anything,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,302,Web request
+2026-10-15 16:54:23,192.168.1.20,10.0.0.5,,web_request,,/products?id=31,,Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/129.0,200,Page served

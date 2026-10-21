@@ -1,8 +1,8 @@
-import pandas as pd
-from fastapi import UploadFile, HTTPException
+from fastapi import HTTPException, UploadFile
 
 from app.database.mongodb import mongodb as db
 from app.detection.detection_engine import DetectionEngine
+from app.services.log_parser import LogParseError, clean_value, parse_logs
 
 
 class LogService:
@@ -10,86 +10,27 @@ class LogService:
     @staticmethod
     async def process_csv(file: UploadFile):
         try:
-                        # Read uploaded file
-            filename = file.filename.lower()
+            logs, skipped = parse_logs(file.filename, file.file)
+        except LogParseError as error:
+            raise HTTPException(status_code=400, detail=str(error))
 
-            if filename.endswith(".csv"):
-                dataframe = pd.read_csv(file.file)
+        # Run detection BEFORE touching the database, so a detector error
+        # can never leave you with half-replaced data.
+        alerts = DetectionEngine.run([dict(log) for log in logs])
 
-            elif filename.endswith(".xlsx"):
-                dataframe = pd.read_excel(file.file)
+        # Each upload REPLACES the current dataset (one investigation at a time).
+        await db.database.logs.delete_many({})
+        await db.database.logs.insert_many([dict(log) for log in logs])
 
-            elif filename.endswith(".json"):
-                dataframe = pd.read_json(file.file)
-
-            elif filename.endswith(".txt"):
-                dataframe = pd.read_csv(file.file)
-
-            else:
-                raise HTTPException(
-                    status_code=400,
-                    detail="Unsupported file format. Supported formats: CSV, XLSX, JSON, TXT."
-                )
-            # Normalize column names
-            dataframe.columns = (
-                dataframe.columns
-                .str.strip()
-                .str.lower()
-            )
-
-            # Replace NaN with None (JSON & MongoDB compatible)
-            dataframe = dataframe.where(pd.notnull(dataframe), None)
-
-            # Required columns
-            required = [
-                "timestamp",
-                "source_ip",
-                "event_type"
-            ]
-
-            for column in required:
-                if column not in dataframe.columns:
-                    raise HTTPException(
-                        status_code=400,
-                        detail=f"Missing column: {column}"
-                    )
-
-            # Convert to list of dictionaries
-            logs = dataframe.to_dict(orient="records")
-
-            # Clear previous logs
-            await db.database.logs.delete_many({})
-
-            # Insert new logs
-            if logs:
-                await db.database.logs.insert_many(logs)
-
-            # Run detection engine
-            alerts = DetectionEngine.run(logs)
-
-            return {
-                "message": "Logs uploaded successfully",
-                "count": len(logs),
-                "alerts": len(alerts)
-            }
-
-        except HTTPException:
-            raise
-
-        except Exception as e:
-            raise HTTPException(
-                status_code=400,
-                detail=str(e)
-            )
+        return {
+            "message": "Logs uploaded successfully",
+            "count": len(logs),
+            "skipped_rows": skipped,
+            "alerts": len(alerts),
+        }
 
     @staticmethod
     async def get_logs():
         logs = await db.database.logs.find({}, {"_id": 0}).to_list(length=500)
-
-        # Replace any NaN values that may already exist in MongoDB
-        for log in logs:
-            for key, value in log.items():
-                if pd.isna(value):
-                    log[key] = None
-
-        return logs
+        # Data saved by older versions may still contain NaN, which JSON can't send.
+        return [{key: clean_value(value) for key, value in log.items()} for log in logs]

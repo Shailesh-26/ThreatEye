@@ -1,152 +1,131 @@
-import { useEffect, useState } from "react";
-import {
-  Search,
-  Bell,
-  LogOut,
-  ShieldAlert,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { LogOut, Search } from "lucide-react";
 
-import { useNavigate } from "react-router-dom";
+import Kbd from "../ui/Kbd";
+import { LogoMark } from "../ui/Logo";
+import { getCurrentUser, logout } from "../../services/authService";
+import { NAV_ITEMS } from "./navigation";
 
-import LiveClock from "../common/LiveClock";
-
-export default function Topbar() {
-  const navigate = useNavigate();
-
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-
-  const confirmLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login", { replace: true });
-  };
-
-  useEffect(() => {
-    const handleKey = (e) => {
-      if (e.key === "Escape") {
-        setShowLogoutModal(false);
-      }
-    };
-
-    window.addEventListener("keydown", handleKey);
-
-    return () => window.removeEventListener("keydown", handleKey);
-  }, []);
-
-  return (
-    <>
-      <header className="h-24 border-b border-green-500/10 bg-[#07090c] px-10 flex items-center justify-between">
-
-        <div>
-          <h1 className="text-4xl font-bold">
-            Security Operations Center
-          </h1>
-
-          <p className="text-zinc-500 mt-1">
-            ThreatEye v1.0
-          </p>
-        </div>
-
-        <div className="flex items-center gap-5">
-
-          <div className="relative">
-
-            <Search
-              size={18}
-              className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500"
-            />
-
-            <input
-              placeholder="Search..."
-              className="w-72 bg-[#101418] border border-zinc-800 rounded-xl py-3 pl-11 pr-4 outline-none transition focus:border-green-500"
-            />
-
-          </div>
-
-          <button className="w-12 h-12 rounded-xl bg-[#101418] border border-zinc-800 flex items-center justify-center hover:border-green-500 transition">
-            <Bell size={18} />
-          </button>
-
-          <div className="text-right">
-            <div className="text-green-400">
-              ● Online
-            </div>
-
-            <LiveClock />
-          </div>
-
-          <button
-            onClick={() => setShowLogoutModal(true)}
-            className="flex items-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-red-400 transition-all duration-300 hover:border-red-500 hover:bg-red-500/20 hover:text-red-300"
-          >
-            <LogOut size={18} />
-            Logout
-          </button>
-
-        </div>
-
-      </header>
-
-      {showLogoutModal && (
-        <div
-          onClick={() => setShowLogoutModal(false)}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-200"
+function SessionTimer({ remainingTime, onExtend }) {
+    const minutes = Math.max(0, Math.ceil(remainingTime / 60000));
+    const low = remainingTime <= 5 * 60 * 1000;
+    return (
+        <button
+            type="button"
+            onClick={onExtend}
+            title="Time until you're signed out. Click to extend."
+            className={`hidden h-9 items-center gap-2 rounded-full border px-3 text-sm transition-colors sm:flex ${low ? "border-sev-medium/40 text-sev-medium hover:bg-sev-medium/10" : "border-graticule text-muted hover:border-graticule-hi hover:text-readout"}`}
         >
-          <div
-  onClick={(e) => e.stopPropagation()}
-  className="
-    w-[460px]
-    rounded-3xl
-    border
-    border-red-500/20
-    bg-[#0c1014]
-    p-8
-    shadow-[0_0_50px_rgba(239,68,68,.12)]
-    animate-[logoutPopup_.35s_cubic-bezier(.22,1,.36,1)]
-  "
->
+            <span className={`h-1.5 w-1.5 rounded-full ${low ? "bg-sev-medium" : "bg-phosphor"}`} />
+            <span className="tabular-nums">{minutes} min</span>
+        </button>
+    );
+}
 
-            <div className="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl bg-red-500/10 text-red-400">
-              <ShieldAlert size={34} />
-            </div>
+function UserMenu() {
+    const [user, setUser] = useState(null);
+    const [open, setOpen] = useState(false);
+    const navigate = useNavigate();
+    const ref = useRef(null);
 
-            <h2 className="text-center text-3xl font-bold">
-              Confirm Logout
-            </h2>
+    useEffect(() => {
+        getCurrentUser().then(setUser).catch(() => setUser(null));
+    }, []);
 
-            <p className="mt-4 text-center text-zinc-400 leading-7">
-              Are you sure you want to log out from
-              <br />
-              <span className="font-semibold text-green-400">
-                ThreatEye Enterprise SOC
-              </span>
-              ?
-            </p>
+    useEffect(() => {
+        if (!open) return undefined;
+        const onClick = (e) => {
+            if (!ref.current?.contains(e.target)) setOpen(false);
+        };
+        const onKey = (e) => e.key === "Escape" && setOpen(false);
+        window.addEventListener("mousedown", onClick);
+        window.addEventListener("keydown", onKey);
+        return () => {
+            window.removeEventListener("mousedown", onClick);
+            window.removeEventListener("keydown", onKey);
+        };
+    }, [open]);
 
-            <p className="mt-3 text-center text-sm text-zinc-500">
-              Your current authenticated session will end.
-            </p>
+    async function signOut() {
+        await logout();
+        navigate("/login", { replace: true });
+    }
 
-            <div className="mt-8 flex gap-4">
+    const initial = (user?.username || user?.email || "?").charAt(0).toUpperCase();
 
-              <button
-                onClick={() => setShowLogoutModal(false)}
-                className="flex-1 rounded-xl border border-zinc-700 bg-[#14191e] py-3 font-semibold transition hover:border-green-500 hover:text-green-400"
-              >
-                Stay Logged In
-              </button>
-
-              <button
-                onClick={confirmLogout}
-                className="flex-1 rounded-xl bg-red-600 py-3 font-semibold transition hover:bg-red-500"
-              >
-                Yes, Log Out
-              </button>
-
-            </div>
-
-          </div>
+    return (
+        <div className="relative" ref={ref}>
+            <button
+                type="button"
+                onClick={() => setOpen((o) => !o)}
+                aria-expanded={open}
+                aria-haspopup="menu"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-graticule-hi bg-plate font-display font-semibold text-readout transition-colors hover:border-phosphor/60"
+            >
+                {initial}
+            </button>
+            {open && (
+                <div role="menu" className="glass absolute right-0 top-11 z-40 w-64 rounded-[18px] p-2">
+                    <div className="px-3 py-2">
+                        <div className="font-medium text-readout">{user?.username ?? "Signed in"}</div>
+                        <div className="truncate text-sm text-faint">{user?.email}</div>
+                    </div>
+                    <div className="my-1 h-px bg-graticule" />
+                    <button
+                        type="button"
+                        role="menuitem"
+                        onClick={signOut}
+                        className="flex w-full items-center gap-2.5 rounded-[10px] px-3 py-2 text-left text-muted transition-colors hover:bg-plate hover:text-readout"
+                    >
+                        <LogOut size={16} /> Sign out
+                    </button>
+                </div>
+            )}
         </div>
-      )}
-    </>
-  );
+    );
+}
+
+export default function Topbar({ onOpenPalette, remainingTime, onExtend }) {
+    const { pathname } = useLocation();
+    const current = NAV_ITEMS.find((item) => pathname.startsWith(item.to));
+
+    return (
+        <header className="sticky top-0 z-30 border-b border-graticule bg-scope/85 backdrop-blur-md">
+            <div className="flex h-16 items-center gap-4 px-4 sm:px-6 lg:px-8">
+                <span className="md:hidden"><LogoMark size={24} /></span>
+                <h1 className="font-display text-xl font-semibold text-readout sm:text-2xl">
+                    {current?.label ?? "ThreatEye"}
+                </h1>
+
+                <button
+                    type="button"
+                    onClick={onOpenPalette}
+                    className="ml-auto flex h-9 items-center gap-2.5 rounded-full border border-graticule bg-bezel pl-3 pr-2 text-sm text-faint transition-colors hover:border-graticule-hi hover:text-muted sm:w-72"
+                >
+                    <Search size={15} />
+                    <span className="hidden sm:inline">Go to, run or upload</span>
+                    <span className="ml-auto hidden items-center gap-1 sm:flex"><Kbd>Ctrl</Kbd><Kbd>K</Kbd></span>
+                </button>
+
+                <SessionTimer remainingTime={remainingTime} onExtend={onExtend} />
+                <UserMenu />
+            </div>
+
+            {/* Mobile navigation */}
+            <nav className="flex gap-1 overflow-x-auto px-3 pb-2 md:hidden" aria-label="Main">
+                {NAV_ITEMS.map(({ to, label }) => (
+                    <NavLink
+                        key={to}
+                        to={to}
+                        className={({ isActive }) =>
+                            `shrink-0 rounded-full px-3 py-1.5 text-sm ${isActive ? "bg-plate text-readout" : "text-muted"}`
+                        }
+                    >
+                        {label}
+                    </NavLink>
+                ))}
+            </nav>
+        </header>
+    );
 }

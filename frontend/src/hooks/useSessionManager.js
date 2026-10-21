@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+
 import api from "../services/api";
 import {
     clearSession,
@@ -7,126 +8,72 @@ import {
     getRemainingSessionTime,
     setAccessToken,
     setRefreshToken,
-    setSessionExpiry
+    setSessionExpiry,
 } from "../services/sessionService";
 
 const WARNING_THRESHOLD = 2 * 60 * 1000;
 
+/**
+ * Watches the access token's expiry time.
+ * - 2 minutes before it expires: showWarning becomes true.
+ * - When it expires: the session is cleared and sessionExpired becomes true.
+ * - extendSession() swaps the refresh token for a new access token.
+ */
 export default function useSessionManager() {
-    const intervalRef = useRef(null);
-    const [showWarning, setShowWarning] = useState(false);
+    const [remainingTime, setRemainingTime] = useState(getRemainingSessionTime);
     const [sessionExpired, setSessionExpired] = useState(false);
-    const [remainingTime, setRemainingTime] = useState(0);
+    const [dismissedWarning, setDismissedWarning] = useState(false);
+    const [active, setActive] = useState(() => !!getAccessToken());
 
-    const stopTimer = useCallback(() => {
-        if (intervalRef.current) {
-            clearInterval(intervalRef.current);
-            intervalRef.current = null;
-        }
+    useEffect(() => {
+        const onUpdate = () => {
+            setActive(!!getAccessToken());
+            setRemainingTime(getRemainingSessionTime());
+            setDismissedWarning(false);
+            setSessionExpired(false);
+        };
+        window.addEventListener("session-updated", onUpdate);
+        return () => window.removeEventListener("session-updated", onUpdate);
     }, []);
 
-    const startTimer = useCallback(() => {
-        stopTimer();
-
-        if (!getAccessToken()) {
-            return;
-        }
-
-        intervalRef.current = setInterval(() => {
+    useEffect(() => {
+        if (!active) return undefined;
+        const interval = setInterval(() => {
             const remaining = getRemainingSessionTime();
-
             setRemainingTime(remaining);
-
-            if (
-                remaining <= WARNING_THRESHOLD &&
-                remaining > 0
-            ) {
-                setShowWarning(true);
-            }
-
             if (remaining <= 0) {
-                logout();
+                clearSession();
+                setActive(false);
+                setSessionExpired(true);
             }
         }, 1000);
-    }, [stopTimer]);
-
-    const logout = useCallback(() => {
-        stopTimer();
-        clearSession();
-        setShowWarning(false);
-        setSessionExpired(true);
-    }, [stopTimer]);
+        return () => clearInterval(interval);
+    }, [active]);
 
     const extendSession = useCallback(async () => {
         try {
-            const response = await api.post(
-                "/auth/refresh",
-                {
-                    refresh_token: getRefreshToken()
-                }
-            );
-
-            const {
-                access_token,
-                refresh_token,
-                expires_in
-            } = response.data;
-
-            setAccessToken(access_token);
-            setRefreshToken(refresh_token);
-            setSessionExpiry(expires_in);
-            setShowWarning(false);
-            setSessionExpired(false);
-            startTimer();
+            const { data } = await api.post("/auth/refresh", {
+                refresh_token: getRefreshToken(),
+            });
+            setAccessToken(data.access_token);
+            setRefreshToken(data.refresh_token);
+            setSessionExpiry(data.expires_in);
+            window.dispatchEvent(new Event("session-updated"));
+            return true;
         } catch {
-            logout();
+            clearSession();
+            setActive(false);
+            setSessionExpired(true);
+            return false;
         }
-    }, [
-        logout,
-        startTimer
-    ]);
-
-    const resetSession = useCallback(() => {
-        setShowWarning(false);
-        setSessionExpired(false);
-        startTimer();
-    }, [startTimer]);
-
-    useEffect(() => {
-        if (getAccessToken()) {
-            resetSession();
-        }
-
-        const handleSessionUpdate = () => {
-            resetSession();
-        };
-
-        window.addEventListener(
-            "session-updated",
-            handleSessionUpdate
-        );
-
-        return () => {
-            window.removeEventListener(
-                "session-updated",
-                handleSessionUpdate
-            );
-
-            stopTimer();
-        };
-    }, [
-        resetSession,
-        stopTimer
-    ]);
+    }, []);
 
     return {
-        showWarning,
-        sessionExpired,
         remainingTime,
+        showWarning: active && !dismissedWarning && remainingTime > 0 && remainingTime <= WARNING_THRESHOLD,
+        sessionExpired,
         extendSession,
-        logout,
-        resetSession,
-        closeWarning: () =>
-            setShowWarning(false)
+        dismissWarning: () => setDismissedWarning(true),
+        acknowledgeExpired: () => setSessionExpired(false),
     };
 }

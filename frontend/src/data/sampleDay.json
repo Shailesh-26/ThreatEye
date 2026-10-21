@@ -1,0 +1,1711 @@
+{
+ "source": "datasets/05_mixed_soc_day.csv",
+ "date": "2026-10-15",
+ "start_hour": 8,
+ "end_hour": 18,
+ "duration": 36000,
+ "events": [
+  {
+   "t": 0,
+   "time": "08:00:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 817,
+   "time": "08:13:37",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 934,
+   "time": "08:15:34",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 1053,
+   "time": "08:17:33",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 1800,
+   "time": "08:30:00",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/docs#configuration"
+   },
+   "alert": -1
+  },
+  {
+   "t": 2220,
+   "time": "08:37:00",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/search?q=c%23+tutorial"
+   },
+   "alert": -1
+  },
+  {
+   "t": 2421,
+   "time": "08:40:21",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 2640,
+   "time": "08:44:00",
+   "ip": "192.168.1.24",
+   "event": "app_event",
+   "lane": "web",
+   "detail": {
+    "field": "message",
+    "value": "Nightly build -- all tests passed"
+   },
+   "alert": -1
+  },
+  {
+   "t": 2700,
+   "time": "08:45:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 2869,
+   "time": "08:47:49",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/cart"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3060,
+   "time": "08:51:00",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "payload",
+    "value": "<img src='/images/avatar.png' alt='profile photo'>"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3327,
+   "time": "08:55:27",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3480,
+   "time": "08:58:00",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?sort=price&order=asc"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3770,
+   "time": "09:02:50",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/login"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3900,
+   "time": "09:05:00",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog?title=evaluate(your)+options"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3900,
+   "time": "09:05:00",
+   "ip": "192.168.1.20",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3920,
+   "time": "09:05:20",
+   "ip": "192.168.1.20",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3940,
+   "time": "09:05:40",
+   "ip": "192.168.1.20",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 3970,
+   "time": "09:06:10",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 4500,
+   "time": "09:15:00",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "21"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4502,
+   "time": "09:15:02",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "22"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4504,
+   "time": "09:15:04",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "23"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4506,
+   "time": "09:15:06",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "25"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4508,
+   "time": "09:15:08",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "53"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4510,
+   "time": "09:15:10",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4512,
+   "time": "09:15:12",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "110"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4514,
+   "time": "09:15:14",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "135"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4516,
+   "time": "09:15:16",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "139"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4518,
+   "time": "09:15:18",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "143"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4520,
+   "time": "09:15:20",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "443"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4522,
+   "time": "09:15:22",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "445"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4524,
+   "time": "09:15:24",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "993"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4526,
+   "time": "09:15:26",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "995"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4528,
+   "time": "09:15:28",
+   "ip": "203.0.113.50",
+   "event": "connection_attempt",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "1433"
+   },
+   "alert": 0
+  },
+  {
+   "t": 4594,
+   "time": "09:16:34",
+   "ip": "192.168.1.24",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 4800,
+   "time": "09:20:00",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "root"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4809,
+   "time": "09:20:09",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "admin"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4818,
+   "time": "09:20:18",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "ubuntu"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4827,
+   "time": "09:20:27",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "root"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4836,
+   "time": "09:20:36",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "pi"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4845,
+   "time": "09:20:45",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "admin"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4854,
+   "time": "09:20:54",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "root"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4863,
+   "time": "09:21:03",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "oracle"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4872,
+   "time": "09:21:12",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "root"
+   },
+   "alert": 1
+  },
+  {
+   "t": 4881,
+   "time": "09:21:21",
+   "ip": "203.0.113.50",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "admin"
+   },
+   "alert": 1
+  },
+  {
+   "t": 5077,
+   "time": "09:24:37",
+   "ip": "192.168.1.24",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "meera"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5400,
+   "time": "09:30:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5488,
+   "time": "09:31:28",
+   "ip": "192.168.1.24",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5536,
+   "time": "09:32:16",
+   "ip": "192.168.1.24",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5576,
+   "time": "09:32:56",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5882,
+   "time": "09:38:02",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/"
+   },
+   "alert": -1
+  },
+  {
+   "t": 5918,
+   "time": "09:38:38",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 7970,
+   "time": "10:12:50",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/login"
+   },
+   "alert": -1
+  },
+  {
+   "t": 8100,
+   "time": "10:15:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 9129,
+   "time": "10:32:09",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/profile"
+   },
+   "alert": -1
+  },
+  {
+   "t": 9795,
+   "time": "10:43:15",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 10800,
+   "time": "11:00:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 10800,
+   "time": "11:00:00",
+   "ip": "198.51.100.91",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "payload",
+    "value": "username=admin' OR '1'='1&password=x"
+   },
+   "alert": 2
+  },
+  {
+   "t": 10820,
+   "time": "11:00:20",
+   "ip": "198.51.100.91",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=1 UNION SELECT username,password FROM users"
+   },
+   "alert": 2
+  },
+  {
+   "t": 10840,
+   "time": "11:00:40",
+   "ip": "198.51.100.91",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "payload",
+    "value": "id=5; DROP TABLE orders; --"
+   },
+   "alert": 2
+  },
+  {
+   "t": 12147,
+   "time": "11:22:27",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/"
+   },
+   "alert": -1
+  },
+  {
+   "t": 13276,
+   "time": "11:41:16",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 13449,
+   "time": "11:44:09",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 13500,
+   "time": "11:45:00",
+   "ip": "192.168.1.45",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "kiran"
+   },
+   "alert": -1
+  },
+  {
+   "t": 13751,
+   "time": "11:49:11",
+   "ip": "192.168.1.21",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "rahul"
+   },
+   "alert": -1
+  },
+  {
+   "t": 14278,
+   "time": "11:57:58",
+   "ip": "192.168.1.22",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": -1
+  },
+  {
+   "t": 14661,
+   "time": "12:04:21",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/cart"
+   },
+   "alert": -1
+  },
+  {
+   "t": 14978,
+   "time": "12:09:38",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 15770,
+   "time": "12:22:50",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 15873,
+   "time": "12:24:33",
+   "ip": "192.168.1.22",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": -1
+  },
+  {
+   "t": 16020,
+   "time": "12:27:00",
+   "ip": "192.168.1.20",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "443"
+   },
+   "alert": -1
+  },
+  {
+   "t": 16100,
+   "time": "12:28:20",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 16527,
+   "time": "12:35:27",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 16642,
+   "time": "12:37:22",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17163,
+   "time": "12:46:03",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17251,
+   "time": "12:47:31",
+   "ip": "192.168.1.22",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "443"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17331,
+   "time": "12:48:51",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/search?q=wireless+mouse"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17614,
+   "time": "12:53:34",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17624,
+   "time": "12:53:44",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17723,
+   "time": "12:55:23",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17728,
+   "time": "12:55:28",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 17820,
+   "time": "12:57:00",
+   "ip": "192.168.1.20",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 18165,
+   "time": "13:02:45",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 18279,
+   "time": "13:04:39",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 18321,
+   "time": "13:05:21",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 18829,
+   "time": "13:13:49",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 18978,
+   "time": "13:16:18",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 19002,
+   "time": "13:16:42",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 19061,
+   "time": "13:17:41",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 19842,
+   "time": "13:30:42",
+   "ip": "192.168.1.20",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 20425,
+   "time": "13:40:25",
+   "ip": "192.168.1.20",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 20446,
+   "time": "13:40:46",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 20874,
+   "time": "13:47:54",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/"
+   },
+   "alert": -1
+  },
+  {
+   "t": 21600,
+   "time": "14:00:00",
+   "ip": "198.51.100.120",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/search?q=<script>alert(1)</script>"
+   },
+   "alert": 3
+  },
+  {
+   "t": 21630,
+   "time": "14:00:30",
+   "ip": "198.51.100.120",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "payload",
+    "value": "<img src=x onerror=alert(document.cookie)>"
+   },
+   "alert": 3
+  },
+  {
+   "t": 21976,
+   "time": "14:06:16",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 22149,
+   "time": "14:09:09",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/"
+   },
+   "alert": -1
+  },
+  {
+   "t": 22459,
+   "time": "14:14:19",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 23563,
+   "time": "14:32:43",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/cart"
+   },
+   "alert": -1
+  },
+  {
+   "t": 23639,
+   "time": "14:33:59",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 23998,
+   "time": "14:39:58",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 24961,
+   "time": "14:56:01",
+   "ip": "192.168.1.24",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 25188,
+   "time": "14:59:48",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 25527,
+   "time": "15:05:27",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 25819,
+   "time": "15:10:19",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 26100,
+   "time": "15:15:00",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 26464,
+   "time": "15:21:04",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/search?q=wireless+mouse"
+   },
+   "alert": -1
+  },
+  {
+   "t": 26522,
+   "time": "15:22:02",
+   "ip": "192.168.1.22",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 26604,
+   "time": "15:23:24",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/cart"
+   },
+   "alert": -1
+  },
+  {
+   "t": 27378,
+   "time": "15:36:18",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/"
+   },
+   "alert": -1
+  },
+  {
+   "t": 28229,
+   "time": "15:50:29",
+   "ip": "192.168.1.21",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "rahul"
+   },
+   "alert": -1
+  },
+  {
+   "t": 28323,
+   "time": "15:52:03",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/docs#install"
+   },
+   "alert": -1
+  },
+  {
+   "t": 30562,
+   "time": "16:29:22",
+   "ip": "192.168.1.20",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  },
+  {
+   "t": 30600,
+   "time": "16:30:00",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30612,
+   "time": "16:30:12",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30624,
+   "time": "16:30:24",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30636,
+   "time": "16:30:36",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30648,
+   "time": "16:30:48",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30653,
+   "time": "16:30:53",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/login"
+   },
+   "alert": -1
+  },
+  {
+   "t": 30660,
+   "time": "16:31:00",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30672,
+   "time": "16:31:12",
+   "ip": "203.0.113.10",
+   "event": "login_failed",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 30720,
+   "time": "16:32:00",
+   "ip": "203.0.113.10",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": 4
+  },
+  {
+   "t": 32066,
+   "time": "16:54:26",
+   "ip": "192.168.1.22",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": -1
+  },
+  {
+   "t": 32371,
+   "time": "16:59:31",
+   "ip": "192.168.1.23",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "vikram"
+   },
+   "alert": -1
+  },
+  {
+   "t": 32414,
+   "time": "17:00:14",
+   "ip": "192.168.1.22",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "anita"
+   },
+   "alert": -1
+  },
+  {
+   "t": 32629,
+   "time": "17:03:49",
+   "ip": "192.168.1.23",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/dashboard"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33078,
+   "time": "17:11:18",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33138,
+   "time": "17:12:18",
+   "ip": "192.168.1.24",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "443"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33201,
+   "time": "17:13:21",
+   "ip": "192.168.1.23",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "443"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33206,
+   "time": "17:13:26",
+   "ip": "192.168.1.22",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=12"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33276,
+   "time": "17:14:36",
+   "ip": "192.168.1.21",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/products?id=31"
+   },
+   "alert": -1
+  },
+  {
+   "t": 33571,
+   "time": "17:19:31",
+   "ip": "192.168.1.20",
+   "event": "login_success",
+   "lane": "auth",
+   "detail": {
+    "field": "username",
+    "value": "priya"
+   },
+   "alert": -1
+  },
+  {
+   "t": 34471,
+   "time": "17:34:31",
+   "ip": "192.168.1.20",
+   "event": "web_request",
+   "lane": "web",
+   "detail": {
+    "field": "url",
+    "value": "/blog/getting-started"
+   },
+   "alert": -1
+  },
+  {
+   "t": 34531,
+   "time": "17:35:31",
+   "ip": "192.168.1.21",
+   "event": "connection",
+   "lane": "network",
+   "detail": {
+    "field": "destination_port",
+    "value": "80"
+   },
+   "alert": -1
+  }
+ ],
+ "alerts": [
+  {
+   "index": 0,
+   "detector_id": "port_scan",
+   "title": "Port Scan Detected",
+   "ip": "203.0.113.50",
+   "severity": "Medium",
+   "threat_score": 58,
+   "mitre": "T1046",
+   "mitre_name": "Network Service Discovery",
+   "count": 15,
+   "first": 4500,
+   "at": 4528,
+   "time": "09:15:28",
+   "reasons": [
+    "15 different ports probed within 60 seconds",
+    "Ports: 21, 22, 23, 25, 53, 80, 110, 135, 139, 143, 443, 445, 993, 995, 1433"
+   ]
+  },
+  {
+   "index": 1,
+   "detector_id": "brute_force",
+   "title": "Brute Force Attack",
+   "ip": "203.0.113.50",
+   "severity": "High",
+   "threat_score": 77,
+   "mitre": "T1110",
+   "mitre_name": "Brute Force",
+   "count": 10,
+   "first": 4800,
+   "at": 4881,
+   "time": "09:21:21",
+   "reasons": [
+    "10 failed logins within 5 minutes",
+    "5 different accounts targeted (password spraying pattern)"
+   ]
+  },
+  {
+   "index": 2,
+   "detector_id": "sql_injection",
+   "title": "SQL Injection Attempt",
+   "ip": "198.51.100.91",
+   "severity": "High",
+   "threat_score": 79,
+   "mitre": "T1190",
+   "mitre_name": "Exploit Public-Facing Application",
+   "count": 3,
+   "first": 10800,
+   "at": 10840,
+   "time": "11:00:40",
+   "reasons": [
+    "3 request(s) contained SQL Injection payloads",
+    "3 different attack technique(s): Quoted tautology (' OR 'a'='a), Stacked query (; DROP ...), UNION SELECT",
+    "Targeted: /login, /products"
+   ]
+  },
+  {
+   "index": 3,
+   "detector_id": "xss",
+   "title": "Cross Site Scripting",
+   "ip": "198.51.100.120",
+   "severity": "High",
+   "threat_score": 71,
+   "mitre": "T1059.007",
+   "mitre_name": "Command and Scripting Interpreter: JavaScript",
+   "count": 2,
+   "first": 21600,
+   "at": 21630,
+   "time": "14:00:30",
+   "reasons": [
+    "2 request(s) contained XSS Attack payloads",
+    "4 different attack technique(s): Cookie / DOM access, Dangerous JS function, Event handler attribute (onerror=), Script tag",
+    "Targeted: /comments, /search"
+   ]
+  },
+  {
+   "index": 4,
+   "detector_id": "brute_force",
+   "title": "Brute Force - Successful Login After Failures",
+   "ip": "203.0.113.10",
+   "severity": "Critical",
+   "threat_score": 97,
+   "mitre": "T1110",
+   "mitre_name": "Brute Force",
+   "count": 7,
+   "first": 30600,
+   "at": 30720,
+   "time": "16:32:00",
+   "reasons": [
+    "7 failed logins within 5 minutes",
+    "Successful login as anita after the failures - possible compromise"
+   ]
+  }
+ ]
+}

@@ -61,9 +61,18 @@ api.interceptors.response.use(
         const originalRequest =
             error.config;
 
+        // Only an expired access token on a normal API call should trigger a
+        // refresh. A wrong password on /auth/login is also a 401, but it must
+        // reach the login form as an error, not reload the page.
+        const isAuthCall = /\/auth\/(login|register|refresh|logout)/.test(
+            originalRequest?.url ?? ""
+        );
+
         if (
             error.response?.status !== 401 ||
-            originalRequest._retry
+            originalRequest._retry ||
+            isAuthCall ||
+            !getRefreshToken()
         ) {
             return Promise.reject(error);
         }
@@ -151,6 +160,8 @@ api.interceptors.response.use(
 
             clearSession();
 
+            window.dispatchEvent(new Event("session-updated"));
+
             window.location.replace(
                 "/login"
             );
@@ -169,4 +180,4 @@ api.interceptors.response.use(
 
 );
 
-export default api;
+export default api;

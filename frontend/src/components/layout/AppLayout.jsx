@@ -1,31 +1,57 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
+import CommandPalette from "./CommandPalette";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
-export default function AppLayout({
-  children,
-}) {
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+const SIDEBAR_KEY = "threateye.sidebarExpanded";
 
-  return (
-    <div className="flex h-screen bg-[#050608]">
+function readExpanded() {
+    try {
+        return localStorage.getItem(SIDEBAR_KEY) !== "false";
+    } catch {
+        return true;
+    }
+}
 
-      <Sidebar
-        sidebarOpen={sidebarOpen}
-        setSidebarOpen={setSidebarOpen}
-      />
+export default function AppLayout({ children, session }) {
+    const [expanded, setExpanded] = useState(readExpanded);
+    const [paletteOpen, setPaletteOpen] = useState(false);
 
-      <div className="flex flex-1 flex-col overflow-hidden">
+    useEffect(() => {
+        const onKey = (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "k") {
+                e.preventDefault();
+                setPaletteOpen((o) => !o);
+            }
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
 
-        <Topbar />
+    function toggleSidebar() {
+        setExpanded((value) => {
+            try {
+                localStorage.setItem(SIDEBAR_KEY, String(!value));
+            } catch {
+                // Storage blocked - the toggle still works for this visit.
+            }
+            return !value;
+        });
+    }
 
-        <main className="flex-1 overflow-auto p-10">
-          {children}
-        </main>
-
-      </div>
-
-    </div>
-  );
+    return (
+        <div className="flex min-h-screen bg-scope">
+            <Sidebar expanded={expanded} onToggle={toggleSidebar} />
+            <div className="flex min-w-0 flex-1 flex-col">
+                <Topbar
+                    onOpenPalette={() => setPaletteOpen(true)}
+                    remainingTime={session.remainingTime}
+                    onExtend={session.extendSession}
+                />
+                <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</main>
+            </div>
+            <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
+        </div>
+    );
 }

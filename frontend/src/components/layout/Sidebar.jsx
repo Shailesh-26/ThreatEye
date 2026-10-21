@@ -1,147 +1,68 @@
-import {
-  LayoutDashboard,
-  Database,
-  ShieldAlert,
-  Radar,
-  Clock3,
-  FileText,
-  Settings,
-  PanelLeftClose,
-  PanelLeftOpen,
-} from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { BookOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
-import {
-  NavLink,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
+import { LogoMark } from "../ui/Logo";
+import { API_DOCS_URL, NAV_ITEMS } from "./navigation";
 
-const menu = [
-  { name: "Dashboard", icon: LayoutDashboard, path: "/" },
-  { name: "Logs", icon: Database, path: "/logs" },
-  { name: "Alerts", icon: ShieldAlert, path: "/alerts" },
-  { name: "Detections", icon: Radar, path: "/detections" },
-  { name: "Timeline", icon: Clock3, path: "/timeline" },
-  { name: "Reports", icon: FileText, path: "/reports" },
-  { name: "Settings", icon: Settings, path: "/settings" },
-];
-
-export default function Sidebar({
-  sidebarOpen,
-  setSidebarOpen,
-}) {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleLogoClick = () => {
-    if (location.pathname !== "/") {
-      navigate("/");
-      return;
-    }
-
-    if (window.scrollY > 50) {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      return;
-    }
-
-    window.location.reload();
-  };
-
-  return (
-    <aside
-      className={`bg-[#0b0f14] border-r border-green-500/10 transition-all duration-300 flex flex-col ${
-        sidebarOpen ? "w-72" : "w-24"
-      }`}
-    >
-      <div className="h-24 border-b border-green-500/10 flex items-center justify-between px-5">
-
-        <div
-          onClick={handleLogoClick}
-          className="flex items-center cursor-pointer"
+export default function Sidebar({ expanded, onToggle }) {
+    return (
+        <aside
+            className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-graticule bg-bezel transition-[width] duration-200 md:flex ${expanded ? "w-56" : "w-[68px]"}`}
         >
-          <div className="w-12 h-12 rounded-xl bg-green-500 flex items-center justify-center text-black font-bold shadow-[0_0_25px_rgba(34,197,94,.6)]">
-            T
-          </div>
-
-          {sidebarOpen && (
-            <div className="ml-4">
-              <h1 className="text-2xl font-bold text-green-400">
-                ThreatEye
-              </h1>
-
-              <p className="text-sm text-zinc-500">
-                Cyber Threat Hunting
-              </p>
+            <div className="flex h-16 items-center gap-2.5 px-5">
+                <LogoMark size={26} />
+                {expanded && (
+                    <span className="font-display text-[19px] font-semibold text-readout">ThreatEye</span>
+                )}
             </div>
-          )}
-        </div>
 
-        <button
-          onClick={() => setSidebarOpen(!sidebarOpen)}
-          className="text-zinc-400 hover:text-green-400 transition"
-        >
-          {sidebarOpen ? (
-            <PanelLeftClose size={22} />
-          ) : (
-            <PanelLeftOpen size={22} />
-          )}
-        </button>
+            <nav className="mt-4 flex flex-1 flex-col gap-1 px-3" aria-label="Main">
+                {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
+                    <NavLink
+                        key={to}
+                        to={to}
+                        title={expanded ? undefined : label}
+                        className={({ isActive }) =>
+                            [
+                                "group relative flex h-10 items-center gap-3 rounded-[var(--radius-control)] px-3 text-[15px] transition-colors",
+                                isActive ? "bg-plate text-readout" : "text-muted hover:bg-plate/60 hover:text-readout",
+                            ].join(" ")
+                        }
+                    >
+                        {({ isActive }) => (
+                            <>
+                                {isActive && (
+                                    <span className="absolute -left-3 top-2 bottom-2 w-[3px] rounded-r-full bg-phosphor" aria-hidden="true" />
+                                )}
+                                <Icon size={18} className={isActive ? "text-phosphor" : ""} />
+                                {expanded && <span>{label}</span>}
+                            </>
+                        )}
+                    </NavLink>
+                ))}
+            </nav>
 
-      </div>
-
-      <nav className="flex-1 px-3 py-6">
-        {menu.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              end={item.path === "/"}
-              className={({ isActive }) =>
-                `flex items-center ${
-                  sidebarOpen
-                    ? "justify-start px-5"
-                    : "justify-center"
-                } py-4 rounded-xl mb-3 transition-all duration-300 ${
-                  isActive
-                    ? "bg-green-500/10 text-green-400"
-                    : "text-zinc-400 hover:bg-zinc-900 hover:text-green-400"
-                }`
-              }
-            >
-              <Icon size={21} />
-
-              {sidebarOpen && (
-                <span className="ml-4 font-medium">
-                  {item.name}
-                </span>
-              )}
-            </NavLink>
-          );
-        })}
-      </nav>
-
-      <div className="border-t border-green-500/10 p-5">
-        <div
-          className={`flex items-center ${
-            sidebarOpen
-              ? "justify-start"
-              : "justify-center"
-          }`}
-        >
-          <div className="w-3 h-3 rounded-full bg-green-400 animate-pulse" />
-
-          {sidebarOpen && (
-            <span className="ml-3 text-green-400">
-              System Online
-            </span>
-          )}
-        </div>
-      </div>
-    </aside>
-  );
+            <div className="flex flex-col gap-1 border-t border-graticule px-3 py-3">
+                <a
+                    href={API_DOCS_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    title={expanded ? undefined : "API docs"}
+                    className="flex h-10 items-center gap-3 rounded-[var(--radius-control)] px-3 text-[15px] text-muted transition-colors hover:bg-plate/60 hover:text-readout"
+                >
+                    <BookOpen size={18} />
+                    {expanded && <span>API docs</span>}
+                </a>
+                <button
+                    type="button"
+                    onClick={onToggle}
+                    aria-label={expanded ? "Collapse sidebar" : "Expand sidebar"}
+                    className="flex h-10 items-center gap-3 rounded-[var(--radius-control)] px-3 text-[15px] text-muted transition-colors hover:bg-plate/60 hover:text-readout"
+                >
+                    {expanded ? <PanelLeftClose size={18} /> : <PanelLeftOpen size={18} />}
+                    {expanded && <span>Collapse</span>}
+                </button>
+            </div>
+        </aside>
+    );
 }

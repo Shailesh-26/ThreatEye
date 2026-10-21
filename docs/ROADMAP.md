@@ -10,12 +10,16 @@ place instead of being bolted on.
 - **Step 2:** plug-in detector design (`base.py` + registry), time-window rules,
   fewer false positives, explainable scores, evidence and IOC fixes, safer
   upload parsing, sample datasets with expected results, 52 automated tests.
+- **Step 3A:** new design system ("the scope"), landing page with a replay of a
+  real sample day, sign-up page, new app shell with command palette and session
+  timer, sign-out that revokes the session on the server, login error fix.
 
 ## v1: what a reviewer should see working
 
 | # | Step | Module |
 |---|---|---|
-| 3 | Investigation drawer shows **Summary / Evidence / Timeline / IOCs** from real detector data; sign-up page | Investigate |
+| 3B | Dashboard (bento, real data) and Logs page redesign | Dashboard / Ingest |
+| 3C | Alerts page with investigation panel: **Summary / Evidence / Timeline / IOCs**; Detections page | Investigate |
 | 4 | **Save alerts** in MongoDB with permanent IDs, first/last seen, status (New → Acknowledged → Resolved), no duplicates on re-run | Alert lifecycle |
 | 5 | **Upload history**: each upload is a batch; choose replace vs. keep | Ingest |
 | 6 | **Incidents**: create from an alert, assign, notes, status, activity log | Respond |

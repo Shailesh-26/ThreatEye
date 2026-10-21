@@ -1,47 +1,80 @@
-import { Navigate } from "react-router-dom";
-import { isAuthenticated } from "../services/authService";
+import { useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-import CyberGrid from "../components/auth/CyberGrid";
-import FloatingHexagons from "../components/auth/FloatingHexagons";
-import LoginHero from "../components/auth/LoginHero";
-import LoginForm from "../components/auth/LoginForm";
-import { useRef } from "react";
-import CyberScrollbar from "../components/auth/CyberScrollbar";
+import AuthLayout from "../components/layout/AuthLayout";
+import Button from "../components/ui/Button";
+import Field from "../components/ui/Field";
+import { errorMessage, login } from "../services/authService";
 
 export default function Login() {
-  const leftRef = useRef(null);
-  if (isAuthenticated()) {
-    return <Navigate to="/" replace />;
-  }
+    const navigate = useNavigate();
+    const location = useLocation();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-  return (
-    <div className="relative h-screen overflow-hidden bg-[#050608] text-white">
-      <CyberGrid />
-      <FloatingHexagons />
+    async function onSubmit(e) {
+        e.preventDefault();
+        setError("");
+        setLoading(true);
+        try {
+            await login(email.trim(), password);
+            navigate(location.state?.from ?? "/dashboard", { replace: true });
+        } catch (err) {
+            setError(
+                err?.response?.status === 401
+                    ? "That email and password don't match an account."
+                    : errorMessage(err, "Sign-in failed. Try again.")
+            );
+        } finally {
+            setLoading(false);
+        }
+    }
 
-      <div className="relative z-10 flex h-screen">
-        {/* LEFT PANEL */}
-        <section
-    ref={leftRef}
-    className="relative hidden lg:block w-[58%] h-screen overflow-y-auto overflow-x-hidden px-8 xl:px-12 no-scrollbar"
->
-          <LoginHero />
-          <CyberScrollbar containerRef={leftRef}/>
-        </section>
-
-        {/* Divider */}
-        <div className="hidden lg:block w-px h-full bg-gradient-to-b from-transparent via-green-500/20 to-transparent" />
-
-        {/* RIGHT PANEL */}
-        <section className="flex-1 h-screen sticky top-0 flex items-center justify-center px-10">
-          <div className="w-full max-w-lg">
-            <LoginForm />
-          </div>
-        </section>
-      </div>
-
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(34,197,94,.08),transparent_40%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/70" />
-    </div>
-  );
+    return (
+        <AuthLayout
+            title="Sign in"
+            subtitle="Use the email and password you registered with."
+            footer={
+                <>
+                    No account yet?{" "}
+                    <Link to="/signup" className="text-phosphor hover:underline">Create one</Link>
+                </>
+            }
+        >
+            <form onSubmit={onSubmit} className="space-y-5" noValidate>
+                <Field
+                    label="Email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <Field
+                    label="Password"
+                    type="password"
+                    autoComplete="current-password"
+                    required
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {error && (
+                    <p role="alert" className="rounded-[var(--radius-control)] border border-sev-critical/30 bg-sev-critical/10 px-3.5 py-2.5 text-sm text-sev-critical">
+                        {error}
+                    </p>
+                )}
+                <Button
+                    type="submit"
+                    variant="primary"
+                    size="lg"
+                    className="w-full"
+                    disabled={loading || !email || !password}
+                >
+                    {loading ? "Signing in" : "Sign in"}
+                </Button>
+            </form>
+        </AuthLayout>
+    );
 }

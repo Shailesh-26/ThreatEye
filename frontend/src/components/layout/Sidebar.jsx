@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { BookOpen, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
+import { BookOpen, PanelLeftClose, PanelLeftOpen, UserRound } from "lucide-react";
 
 import { LogoMark } from "../ui/Logo";
 import { API_DOCS_URL, NAV_ITEMS } from "./navigation";
@@ -9,12 +9,16 @@ export default function Sidebar({ expanded, onToggle }) {
         <aside
             className={`sticky top-0 hidden h-screen shrink-0 flex-col border-r border-graticule bg-bezel transition-[width] duration-200 md:flex ${expanded ? "w-56" : "w-[68px]"}`}
         >
-            <div className="flex h-16 items-center gap-2.5 px-5">
-                <LogoMark size={26} />
+            <Link
+                to="/dashboard"
+                title="Go to the dashboard"
+                className="group flex h-16 items-center gap-2.5 px-5 transition-opacity hover:opacity-90"
+            >
+                <LogoMark size={26} className="transition-transform duration-300 group-hover:rotate-[-12deg]" />
                 {expanded && (
                     <span className="font-display text-[19px] font-semibold text-readout">ThreatEye</span>
                 )}
-            </div>
+            </Link>
 
             <nav className="mt-4 flex flex-1 flex-col gap-1 px-3" aria-label="Main">
                 {NAV_ITEMS.map(({ to, label, icon: Icon }) => (
@@ -43,6 +47,14 @@ export default function Sidebar({ expanded, onToggle }) {
             </nav>
 
             <div className="flex flex-col gap-1 border-t border-graticule px-3 py-3">
+                <NavLink
+                    to="/profile"
+                    title={expanded ? undefined : "Profile"}
+                    className={({ isActive }) => `flex h-10 items-center gap-3 rounded-[var(--radius-control)] px-3 text-[15px] transition-colors ${isActive ? "bg-plate text-readout" : "text-muted hover:bg-plate/60 hover:text-readout"}`}
+                >
+                    <UserRound size={18} />
+                    {expanded && <span>Profile</span>}
+                </NavLink>
                 <a
                     href={API_DOCS_URL}
                     target="_blank"

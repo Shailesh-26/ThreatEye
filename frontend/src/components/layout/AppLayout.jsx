@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+import AppFooter from "./AppFooter";
 import CommandPalette from "./CommandPalette";
 import SignOutDialog from "./SignOutDialog";
 import Sidebar from "./Sidebar";
@@ -53,6 +54,7 @@ export default function AppLayout({ children, session }) {
                     onSignOut={() => setSigningOut(true)}
                 />
                 <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</main>
+                <AppFooter />
             </div>
             <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onSignOut={() => setSigningOut(true)} />
             <SignOutDialog open={signingOut} onClose={() => setSigningOut(false)} />

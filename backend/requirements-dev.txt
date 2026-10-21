@@ -1,2 +1,6 @@
 -r requirements.txt
 pytest==9.0.3
+# For API tests: an in-memory MongoDB (tests never touch your real database)
+# and the HTTP client FastAPI's TestClient uses.
+mongomock-motor==0.0.36
+httpx==0.28.1

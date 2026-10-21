@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { BookOpen, LogOut, Play, Search, Upload } from "lucide-react";
+import { BookOpen, LogOut, MonitorSmartphone, Play, Search, Upload, UserRound } from "lucide-react";
 import { toast } from "sonner";
 
 import Kbd from "../ui/Kbd";
@@ -57,6 +57,8 @@ export default function CommandPalette({ open, onClose, onSignOut }) {
                 },
             })),
             { id: "docs", group: "Actions", label: "Open API docs", hint: "FastAPI /docs in a new tab", icon: BookOpen, run: () => window.open(API_DOCS_URL, "_blank", "noopener") },
+            { id: "profile", group: "Account", label: "Profile and password", hint: "Change your name or password", icon: UserRound, run: () => navigate("/profile") },
+            { id: "sessions", group: "Account", label: "Signed-in devices", hint: "See and sign out other sessions", icon: MonitorSmartphone, run: () => navigate("/profile#sessions") },
             {
                 id: "signout", group: "Account", label: "Sign out", hint: "Ends this session on the server too", icon: LogOut,
                 run: onSignOut,

@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { ArrowUp, ExternalLink } from "lucide-react";
 
 import Button from "../components/ui/Button";
 import Logo from "../components/ui/Logo";
@@ -346,35 +348,151 @@ function Detectors() {
     );
 }
 
+
+// ---- Header with section tracking and smooth scrolling -----------------------
+const SECTIONS = [
+    { id: "replay", label: "Replay" },
+    { id: "how", label: "How it works" },
+    { id: "detectors", label: "Detectors" },
+];
+
+function useActiveSection() {
+    const [active, setActive] = useState(null);
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                for (const entry of entries) if (entry.isIntersecting) setActive(entry.target.id);
+            },
+            { rootMargin: "-45% 0px -50% 0px" }
+        );
+        for (const { id } of SECTIONS) {
+            const el = document.getElementById(id);
+            if (el) observer.observe(el);
+        }
+        const top = document.getElementById("top-of-page");
+        const topObserver = new IntersectionObserver(([e]) => e.isIntersecting && setActive(null), { rootMargin: "0px 0px -80% 0px" });
+        if (top) topObserver.observe(top);
+        return () => {
+            observer.disconnect();
+            topObserver.disconnect();
+        };
+    }, []);
+    return active;
+}
+
+function useSmoothScroll() {
+    const reduceMotion = useReducedMotion();
+    return (id) => (e) => {
+        e?.preventDefault();
+        const el = id ? document.getElementById(id) : null;
+        if (el) el.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+        else window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+        window.history.replaceState(null, "", id ? `#${id}` : window.location.pathname);
+    };
+}
+
+function LandingHeader({ signedIn }) {
+    const active = useActiveSection();
+    const scrollTo = useSmoothScroll();
+    const { scrollYProgress } = useScroll();
+    const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30 });
+
+    return (
+        <header className="glass sticky top-0 z-40 rounded-none border-x-0 border-t-0">
+            <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-6 px-4 sm:px-6 lg:px-8">
+                <a href="#top" onClick={scrollTo(null)} aria-label="Back to the top" className="group">
+                    <Logo />
+                </a>
+                <nav className="relative hidden gap-1 text-[15px] md:flex" aria-label="Page sections">
+                    {SECTIONS.map(({ id, label }) => (
+                        <a
+                            key={id}
+                            href={`#${id}`}
+                            onClick={scrollTo(id)}
+                            aria-current={active === id ? "true" : undefined}
+                            className={`relative rounded-full px-3 py-1.5 transition-colors ${active === id ? "text-readout" : "text-muted hover:text-readout"}`}
+                        >
+                            {active === id && (
+                                <motion.span layoutId="landing-nav" className="absolute inset-0 rounded-full bg-plate" transition={{ type: "spring", stiffness: 380, damping: 32 }} />
+                            )}
+                            <span className="relative">{label}</span>
+                        </a>
+                    ))}
+                    <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-muted transition-colors hover:text-readout">
+                        Source code <ExternalLink size={13} />
+                    </a>
+                </nav>
+                <div className="ml-auto flex items-center gap-2">
+                    {signedIn ? (
+                        <Button to="/dashboard" variant="primary">Open dashboard</Button>
+                    ) : (
+                        <>
+                            <Button to="/login" variant="ghost">Sign in</Button>
+                            <Button to="/signup" variant="primary">Create account</Button>
+                        </>
+                    )}
+                </div>
+            </div>
+            <motion.div className="h-[2px] origin-left bg-phosphor/70" style={{ scaleX: progress }} aria-hidden="true" />
+        </header>
+    );
+}
+
+function LandingFooter({ signedIn }) {
+    const scrollTo = useSmoothScroll();
+    const column = "flex flex-col gap-2";
+    const link = "text-muted transition-colors hover:text-readout";
+    return (
+        <footer className="border-t border-graticule bg-bezel/60">
+            <div className="mx-auto grid max-w-[1240px] gap-10 px-4 py-12 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr] lg:px-8">
+                <div>
+                    <Logo />
+                    <p className="mt-4 max-w-[42ch] text-sm text-faint">
+                        Detection is rule-based and runs on files you upload. Saved alerts, incidents and
+                        threat-intelligence lookups are on the roadmap.
+                    </p>
+                </div>
+                <nav className={column} aria-label="On this page">
+                    <span className="text-sm text-faint">On this page</span>
+                    {SECTIONS.map(({ id, label }) => (
+                        <a key={id} href={`#${id}`} onClick={scrollTo(id)} className={link}>{label}</a>
+                    ))}
+                </nav>
+                <nav className={column} aria-label="Project">
+                    <span className="text-sm text-faint">Project</span>
+                    <a href={GITHUB_URL} target="_blank" rel="noreferrer" className={link}>Source code</a>
+                    <a href={`${GITHUB_URL}/blob/main/docs/HOW_IT_WORKS.md`} target="_blank" rel="noreferrer" className={link}>How the code works</a>
+                    <a href={`${GITHUB_URL}/blob/main/docs/ROADMAP.md`} target="_blank" rel="noreferrer" className={link}>Roadmap</a>
+                </nav>
+                <nav className={column} aria-label="Account">
+                    <span className="text-sm text-faint">Account</span>
+                    {signedIn ? (
+                        <Link to="/dashboard" className={link}>Open dashboard</Link>
+                    ) : (
+                        <>
+                            <Link to="/login" className={link}>Sign in</Link>
+                            <Link to="/signup" className={link}>Create account</Link>
+                        </>
+                    )}
+                    <button type="button" onClick={scrollTo(null)} className={`mt-2 flex items-center gap-1.5 text-left ${link}`}>
+                        <ArrowUp size={14} /> Back to top
+                    </button>
+                </nav>
+            </div>
+        </footer>
+    );
+}
+
 // ---- Page -----------------------------------------------------------------
 export default function Landing() {
     const signedIn = isAuthenticated();
 
     return (
         <div className="min-h-screen bg-scope">
-            <header className="glass sticky top-0 z-40 rounded-none border-x-0 border-t-0">
-                <div className="mx-auto flex h-16 max-w-[1240px] items-center gap-6 px-4 sm:px-6 lg:px-8">
-                    <a href="#top" aria-label="ThreatEye home"><Logo /></a>
-                    <nav className="hidden gap-6 text-[15px] text-muted md:flex" aria-label="Page sections">
-                        <a href="#replay" className="hover:text-readout">Replay</a>
-                        <a href="#how" className="hover:text-readout">How it works</a>
-                        <a href="#detectors" className="hover:text-readout">Detectors</a>
-                        <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-readout">Source code</a>
-                    </nav>
-                    <div className="ml-auto flex items-center gap-2">
-                        {signedIn ? (
-                            <Button to="/dashboard" variant="primary">Open dashboard</Button>
-                        ) : (
-                            <>
-                                <Button to="/login" variant="ghost">Sign in</Button>
-                                <Button to="/signup" variant="primary">Create account</Button>
-                            </>
-                        )}
-                    </div>
-                </div>
-            </header>
+            <LandingHeader signedIn={signedIn} />
 
             <main id="top">
+                <span id="top-of-page" className="absolute top-0" aria-hidden="true" />
                 <section className="graticule border-b border-graticule">
                     <div className="mx-auto max-w-[1240px] px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pt-20">
                         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
@@ -422,18 +540,7 @@ export default function Landing() {
                 <Detectors />
             </main>
 
-            <footer className="border-t border-graticule">
-                <div className="mx-auto flex max-w-[1240px] flex-col gap-4 px-4 py-10 text-sm text-faint sm:px-6 md:flex-row md:items-center lg:px-8">
-                    <Logo size={22} />
-                    <p className="max-w-[70ch] md:ml-6">
-                        Detection is rule-based and runs on files you upload. Live ingestion, saved incidents and
-                        threat-intelligence lookups are on the roadmap.
-                    </p>
-                    <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="text-muted hover:text-readout md:ml-auto">
-                        Source code on GitHub
-                    </a>
-                </div>
-            </footer>
+            <LandingFooter signedIn={signedIn} />
         </div>
     );
 }

@@ -16,6 +16,7 @@ fired, and shows everything on an analyst dashboard.
 | Sign-up and sign-in with JWT access + refresh tokens, server-side sign-out | ✅ |
 | Public landing page with a replay of a real sample dataset | ✅ |
 | Command palette (Ctrl+K): go to pages, run detectors, sign out | ✅ |
+| Profile: change name and password, see signed-in devices, sign out other devices | ✅ |
 | Upload logs (CSV, XLSX, JSON, TXT) by drag and drop, or load a sample dataset in one click | ✅ |
 | Dashboard: radar of source IPs by risk, activity over time, severity, attacking sources, detector counts | ✅ |
 | Logs: search, event filters, "only rows in alerts", time-range links from the dashboard, row details | ✅ |
@@ -28,7 +29,7 @@ fired, and shows everything on an analyst dashboard.
 | Evidence per alert: which field matched, excerpt, technique | ✅ |
 | IOC extraction (IPs, domains, URLs, emails, hashes) | ✅ |
 | MITRE ATT&CK technique per alert | ✅ |
-| Automated tests (`pytest`) | ✅ 61 tests |
+| Automated tests (`pytest`): unit tests plus API tests on an in-memory database | ✅ 71 tests |
 | Saved alert history, incidents, IP blocking | Planned |
 
 ## Tech stack

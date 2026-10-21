@@ -37,7 +37,8 @@ class AuthService:
             "email": user_data["email"],
             "password": hash_password(
                 user_data["password"]
-            )
+            ),
+            "created_at": datetime.now(timezone.utc),
         }
 
         await users_collection.insert_one(
@@ -52,7 +53,9 @@ class AuthService:
     @staticmethod
     async def login_user(
         email: str,
-        password: str
+        password: str,
+        user_agent: str | None = None,
+        ip_address: str | None = None,
     ):
 
         users_collection = mongodb.database.users
@@ -108,8 +111,8 @@ class AuthService:
                 timezone.utc
             ),
             "device_name": None,
-            "ip_address": None,
-            "user_agent": None
+            "ip_address": ip_address,
+            "user_agent": (user_agent or "")[:300] or None
         }
 
         await refresh_tokens_collection.insert_one(
@@ -261,4 +264,4 @@ class AuthService:
 
         return {
             "message": "Logged out successfully"
-        }
+        }

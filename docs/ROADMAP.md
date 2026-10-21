@@ -18,6 +18,11 @@ place instead of being bolted on.
   one-click samples, search and filters, Alerts investigation panel
   (Summary / Evidence / Timeline / IOCs), Detections with inline runs,
   sign-out confirmation.
+- **Step 3C:** profile page (name, password change that signs out other
+  devices, signed-in devices list with per-device sign-out), session and account
+  menus, clickable logo, app footer with live API/database status, landing page
+  smooth scrolling with section tracking and a full footer, API tests on an
+  in-memory database (71 tests).
 
 ## v1: what a reviewer should see working
 
@@ -60,7 +65,7 @@ These files were removed in step 2; every idea from them is kept here.
 Nothing in this section is built yet.
 
 **Session management leftovers:** cleanup of expired refresh tokens,
-revoke all sessions, list active devices, cross-tab logout, login audit trail.
+cross-tab logout, login audit trail. (Listing devices and signing them out is done.)
 
 **More detectors:** DDoS, credential stuffing, impossible travel, malware
 indicators, beaconing, DNS tunneling, PowerShell abuse, suspicious file

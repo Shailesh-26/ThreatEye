@@ -16,7 +16,7 @@ export default function Field({ label, hint, error, className = "", ...inputProp
                 aria-describedby={describedBy}
                 className={[
                     "h-11 w-full rounded-[var(--radius-control)] bg-scope px-3.5 text-readout",
-                    "border outline-none focus-visible:outline-none transition-colors placeholder:text-faint",
+                    "border outline-none focus-visible:outline-none transition-colors placeholder:text-faint disabled:cursor-not-allowed disabled:text-muted disabled:opacity-70",
                     error
                         ? "border-sev-critical/60 focus:border-sev-critical"
                         : "border-graticule-hi focus:border-phosphor",

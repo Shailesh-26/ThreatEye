@@ -10,6 +10,7 @@ import Detections from "./pages/Detections";
 import Landing from "./pages/Landing";
 import Login from "./pages/Login";
 import Logs from "./pages/Logs";
+import Profile from "./pages/Profile";
 import Signup from "./pages/Signup";
 import { isAuthenticated } from "./services/authService";
 
@@ -47,6 +48,7 @@ export default function App() {
                 <Route path="/logs" element={inApp(<Logs />)} />
                 <Route path="/alerts" element={inApp(<Alerts />)} />
                 <Route path="/detections" element={inApp(<Detections />)} />
+                <Route path="/profile" element={inApp(<Profile />)} />
                 <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
 

@@ -39,3 +39,26 @@ class TokenResponse(BaseModel):
 class UserResponse(BaseModel):
     username: str
     email: EmailStr
+
+
+class ProfileUpdate(BaseModel):
+    username: str = Field(min_length=2, max_length=40)
+
+    @field_validator("username")
+    @classmethod
+    def strip_username(cls, value: str) -> str:
+        value = value.strip()
+        if len(value) < 2:
+            raise ValueError("Name must be at least 2 characters")
+        return value
+
+
+class PasswordChange(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=8, max_length=72)
+    # The session making the change stays signed in; all others are signed out.
+    refresh_token: str | None = None
+
+
+class RefreshTokenBody(BaseModel):
+    refresh_token: str

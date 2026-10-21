@@ -63,3 +63,36 @@ export function errorMessage(error, fallback) {
     if (!error?.response) return "Can't reach the ThreatEye server. Check that the backend is running on port 8000.";
     return fallback;
 }
+
+// ---- Profile and sessions --------------------------------------------------
+
+export async function updateProfile(username) {
+    const { data } = await api.patch("/auth/me", { username });
+    return data;
+}
+
+export async function changePassword(currentPassword, newPassword) {
+    const { data } = await api.post("/auth/change-password", {
+        current_password: currentPassword,
+        new_password: newPassword,
+        refresh_token: getRefreshToken(),
+    });
+    return data;
+}
+
+export async function listSessions() {
+    const { data } = await api.get("/auth/sessions", {
+        headers: { "X-Refresh-Token": getRefreshToken() ?? "" },
+    });
+    return data;
+}
+
+export async function revokeSession(id) {
+    const { data } = await api.delete(`/auth/sessions/${id}`);
+    return data;
+}
+
+export async function revokeOtherSessions() {
+    const { data } = await api.post("/auth/sessions/revoke-others", { refresh_token: getRefreshToken() });
+    return data;
+}

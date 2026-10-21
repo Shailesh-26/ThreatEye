@@ -1,4 +1,4 @@
-# Sample datasets
+# Sample datasets (`datasets/` folder)
 
 Upload any of these on the **Logs** page. Each upload **replaces** the
 previous data, then open **Alerts** to see what was detected.

@@ -52,7 +52,7 @@ npm run dev                     # http://localhost:5173
 ```
 
 Create an account at http://127.0.0.1:8000/docs → `POST /api/v1/auth/register`,
-then log in on the website and upload a file from [`datasets/`](datasets/README.md).
+then log in on the website and upload a file from `datasets/` (expected results: [docs/DATASETS.md](docs/DATASETS.md)).
 
 ## Run the tests
 
@@ -73,7 +73,7 @@ backend/app/
   services/      upload parsing, alerts, dashboard, scoring, evidence, IOCs, auth
 backend/tests/   automated tests
 datasets/        sample logs with expected results
-docs/            how it works + roadmap
+docs/            how it works, datasets guide, roadmap
 frontend/src/    React app (pages, components, API services)
 ```
 

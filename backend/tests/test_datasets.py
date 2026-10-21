@@ -1,6 +1,6 @@
 """
 Runs every file in datasets/ through the same parser and detectors the
-upload uses, and checks the results promised in datasets/README.md.
+upload uses, and checks the results promised in docs/DATASETS.md.
 """
 
 from pathlib import Path

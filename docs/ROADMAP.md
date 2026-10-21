@@ -46,3 +46,55 @@ Each one is a self-contained module:
 
 Rule of thumb: finish and test one module before starting the next, and
 only describe a feature as working once it is.
+
+## Wishlist from earlier planning (`phases.md` / `structure.txt`)
+
+These files were removed in step 2; every idea from them is kept here.
+Nothing in this section is built yet.
+
+**Session management leftovers:** cleanup of expired refresh tokens,
+revoke all sessions, list active devices, cross-tab logout, login audit trail.
+
+**More detectors:** DDoS, credential stuffing, impossible travel, malware
+indicators, beaconing, DNS tunneling, PowerShell abuse, suspicious file
+access, lateral movement, privilege escalation, ransomware indicators.
+
+**Scoring:** factor in IOC reputation, event frequency and an IP's past behaviour.
+
+**IOCs:** IPv6, real hostname detection, clickable IOCs that open a lookup.
+
+**Threat intel:** VirusTotal, AbuseIPDB, GeoIP, ASN, WHOIS/ISP/country,
+blacklist status, Shodan, Censys.
+
+**Dashboard:** world attack map, MITRE heatmap, threat trends, top source
+IPs, attack distribution, live alert stream, detection timeline, recent investigations.
+
+**Logs:** filter and search logs; advanced filters (severity, MITRE
+technique, country, IP, time range, status).
+
+**Incidents:** assign analyst, notes, attachments, timeline, status, SOC workflow.
+
+**Reports:** executive PDF, technical SOC report, CSV, weekly/monthly
+summaries, MITRE coverage report.
+
+**AI assistant:** alert summary, "explain this alert", root-cause hints,
+chat with logs, detection suggestions. It assists the analyst and is
+clearly labelled as AI output.
+
+**Platform:** live log streaming (WebSockets), custom detection rules
+(enable/disable/priority), asset and endpoint inventory with criticality,
+roles (admin, analyst, tier-2, read-only auditor), audit log of every
+action, notification center, global search, command palette, keyboard
+shortcuts, accessibility, skeleton loaders, error boundaries, lazy loading,
+virtualized tables, responsive design, dark/light theme.
+
+**Enterprise-scale stretch ideas:** threat hunting workspace, IOC
+management, YARA and Sigma rules, MITRE Navigator / ATT&CK matrix, CVE
+explorer, network topology and attack-path graph, SOAR playbooks, UEBA,
+evidence locker, forensics and malware-analysis pages, sandbox results,
+threat campaign tracking, timeline replay, compliance dashboards
+(ISO 27001, NIST, PCI DSS), multi-tenancy, API/integration management,
+onboarding, Docker + cloud deployment.
+
+**UI wishes:** animated login, entrance animations, motion and
+transitions, an immersive and interactive feel that responds to the user.

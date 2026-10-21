@@ -1,6 +1,6 @@
 import api from "./api";
 
-export const fetchAlerts=async()=>{
-const res=await api.get("/alerts");
-return res.data;
-};
+export async function fetchAlerts() {
+    const { data } = await api.get("/alerts/");
+    return data;
+}

@@ -100,6 +100,33 @@ body {
 }
 }
 
+/* Radar: sweep rotation, contact flare + phosphor fade, critical ping. */
+@keyframes radar-sweep {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes radar-blip {
+    0% { opacity: 1; transform: scale(1.7); }
+    6% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0.18; transform: scale(1); }
+}
+
+@keyframes radar-ping {
+    0% { opacity: 0.9; transform: scale(1); }
+    35% { opacity: 0; transform: scale(3.4); }
+    100% { opacity: 0; transform: scale(3.4); }
+}
+
+/* A row or tile that was just linked to (e.g. opened from the radar). */
+@keyframes locate {
+    0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-phosphor) 55%, transparent); }
+    100% { box-shadow: 0 0 0 14px transparent; }
+}
+
+.locate {
+    animation: locate 900ms ease-out 2;
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

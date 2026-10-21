@@ -7,16 +7,26 @@ import { AnimatePresence, motion } from "framer-motion";
  */
 export default function Modal({ open, onClose, title, children, footer, dismissable = true }) {
     const panelRef = useRef(null);
+    const closeRef = useRef(onClose);
 
     useEffect(() => {
+        closeRef.current = onClose;
+    });
+
+    // Focus the dialog once when it opens (not on every re-render).
+    useEffect(() => {
         if (!open) return undefined;
+        const previous = document.activeElement;
         panelRef.current?.focus();
         const onKey = (e) => {
-            if (e.key === "Escape" && dismissable) onClose?.();
+            if (e.key === "Escape" && dismissable) closeRef.current?.();
         };
         window.addEventListener("keydown", onKey);
-        return () => window.removeEventListener("keydown", onKey);
-    }, [open, dismissable, onClose]);
+        return () => {
+            window.removeEventListener("keydown", onKey);
+            previous?.focus?.();
+        };
+    }, [open, dismissable]);
 
     return (
         <AnimatePresence>

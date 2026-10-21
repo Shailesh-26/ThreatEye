@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { LogOut, Search } from "lucide-react";
 
 import Kbd from "../ui/Kbd";
 import { LogoMark } from "../ui/Logo";
-import { getCurrentUser, logout } from "../../services/authService";
+import { getCurrentUser } from "../../services/authService";
 import { NAV_ITEMS } from "./navigation";
 
 function SessionTimer({ remainingTime, onExtend }) {
@@ -23,10 +23,9 @@ function SessionTimer({ remainingTime, onExtend }) {
     );
 }
 
-function UserMenu() {
+function UserMenu({ onSignOut }) {
     const [user, setUser] = useState(null);
     const [open, setOpen] = useState(false);
-    const navigate = useNavigate();
     const ref = useRef(null);
 
     useEffect(() => {
@@ -47,9 +46,9 @@ function UserMenu() {
         };
     }, [open]);
 
-    async function signOut() {
-        await logout();
-        navigate("/login", { replace: true });
+    function signOut() {
+        setOpen(false);
+        onSignOut();
     }
 
     const initial = (user?.username || user?.email || "?").charAt(0).toUpperCase();
@@ -86,7 +85,7 @@ function UserMenu() {
     );
 }
 
-export default function Topbar({ onOpenPalette, remainingTime, onExtend }) {
+export default function Topbar({ onOpenPalette, remainingTime, onExtend, onSignOut }) {
     const { pathname } = useLocation();
     const current = NAV_ITEMS.find((item) => pathname.startsWith(item.to));
 
@@ -109,7 +108,7 @@ export default function Topbar({ onOpenPalette, remainingTime, onExtend }) {
                 </button>
 
                 <SessionTimer remainingTime={remainingTime} onExtend={onExtend} />
-                <UserMenu />
+                <UserMenu onSignOut={onSignOut} />
             </div>
 
             {/* Mobile navigation */}

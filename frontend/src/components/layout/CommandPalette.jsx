@@ -5,7 +5,6 @@ import { BookOpen, LogOut, Play, Search, Upload } from "lucide-react";
 import { toast } from "sonner";
 
 import Kbd from "../ui/Kbd";
-import { logout } from "../../services/authService";
 import { getDetectionRules, runDetectionRule } from "../../services/detectionService";
 import { API_DOCS_URL, NAV_ITEMS } from "./navigation";
 
@@ -13,7 +12,7 @@ import { API_DOCS_URL, NAV_ITEMS } from "./navigation";
  * Ctrl+K / Cmd+K: jump to a page, run a detector, or sign out - all from the keyboard.
  * Every command does something real; there are no decorative entries.
  */
-export default function CommandPalette({ open, onClose }) {
+export default function CommandPalette({ open, onClose, onSignOut }) {
     const navigate = useNavigate();
     const inputRef = useRef(null);
     const [query, setQuery] = useState("");
@@ -60,16 +59,13 @@ export default function CommandPalette({ open, onClose }) {
             { id: "docs", group: "Actions", label: "Open API docs", hint: "FastAPI /docs in a new tab", icon: BookOpen, run: () => window.open(API_DOCS_URL, "_blank", "noopener") },
             {
                 id: "signout", group: "Account", label: "Sign out", hint: "Ends this session on the server too", icon: LogOut,
-                run: async () => {
-                    await logout();
-                    navigate("/login", { replace: true });
-                },
+                run: onSignOut,
             },
         ];
         const q = query.trim().toLowerCase();
         const all = [...go, ...actions];
         return q ? all.filter((c) => `${c.label} ${c.hint}`.toLowerCase().includes(q)) : all;
-    }, [navigate, query, rules]);
+    }, [navigate, query, rules, onSignOut]);
 
     function close() {
         setQuery("");

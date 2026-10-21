@@ -29,6 +29,11 @@
  React frontend     Dashboard, Logs, Alerts (+ investigation drawer), Detections
 ```
 
+Sample datasets can also be loaded without uploading: `GET /api/v1/logs/samples`
+lists the files in `datasets/`, and `POST /api/v1/logs/samples/<name>` loads one
+through the same parser. Only names from that list are accepted, so the endpoint
+can't be used to read other files on the server.
+
 Alerts are **computed on request**: every time the Alerts page or Dashboard
 loads, the detectors run again on the logs currently stored. Nothing about
 alerts is saved yet. That's a planned step (see ROADMAP.md).

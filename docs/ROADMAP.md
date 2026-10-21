@@ -13,13 +13,16 @@ place instead of being bolted on.
 - **Step 3A:** new design system ("the scope"), landing page with a replay of a
   real sample day, sign-up page, new app shell with command palette and session
   timer, sign-out that revokes the session on the server, login error fix.
+- **Step 3B:** every page redesigned. Radar of source IPs (sign-in, landing,
+  dashboard), bento dashboard from real data, Logs with drag-and-drop upload,
+  one-click samples, search and filters, Alerts investigation panel
+  (Summary / Evidence / Timeline / IOCs), Detections with inline runs,
+  sign-out confirmation.
 
 ## v1: what a reviewer should see working
 
 | # | Step | Module |
 |---|---|---|
-| 3B | Dashboard (bento, real data) and Logs page redesign | Dashboard / Ingest |
-| 3C | Alerts page with investigation panel: **Summary / Evidence / Timeline / IOCs**; Detections page | Investigate |
 | 4 | **Save alerts** in MongoDB with permanent IDs, first/last seen, status (New → Acknowledged → Resolved), no duplicates on re-run | Alert lifecycle |
 | 5 | **Upload history**: each upload is a batch; choose replace vs. keep | Ingest |
 | 6 | **Incidents**: create from an alert, assign, notes, status, activity log | Respond |

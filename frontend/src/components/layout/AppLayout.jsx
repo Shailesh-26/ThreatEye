@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 import CommandPalette from "./CommandPalette";
+import SignOutDialog from "./SignOutDialog";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
 
@@ -17,6 +18,7 @@ function readExpanded() {
 export default function AppLayout({ children, session }) {
     const [expanded, setExpanded] = useState(readExpanded);
     const [paletteOpen, setPaletteOpen] = useState(false);
+    const [signingOut, setSigningOut] = useState(false);
 
     useEffect(() => {
         const onKey = (e) => {
@@ -48,10 +50,12 @@ export default function AppLayout({ children, session }) {
                     onOpenPalette={() => setPaletteOpen(true)}
                     remainingTime={session.remainingTime}
                     onExtend={session.extendSession}
+                    onSignOut={() => setSigningOut(true)}
                 />
                 <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">{children}</main>
             </div>
-            <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} />
+            <CommandPalette open={paletteOpen} onClose={() => setPaletteOpen(false)} onSignOut={() => setSigningOut(true)} />
+            <SignOutDialog open={signingOut} onClose={() => setSigningOut(false)} />
         </div>
     );
 }

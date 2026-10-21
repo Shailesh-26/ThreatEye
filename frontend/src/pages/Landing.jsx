@@ -4,11 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import Button from "../components/ui/Button";
 import Logo from "../components/ui/Logo";
 import ReplayScope from "../components/replay/ReplayScope";
+import Radar from "../components/radar/Radar";
+import { sampleContacts } from "../lib/contacts";
 import day from "../data/sampleDay.json";
 import { isAuthenticated } from "../services/authService";
 import { severityOf } from "../lib/severity";
 
 const GITHUB_URL = "https://github.com/Shailesh-26/ThreatEye";
+const CONTACTS = sampleContacts();
 
 // ---- Real examples pulled from the replay data -------------------------
 const alertBy = (detector, ip) => day.alerts.find((a) => a.detector_id === detector && a.ip === ip);
@@ -374,17 +377,17 @@ export default function Landing() {
             <main id="top">
                 <section className="graticule border-b border-graticule">
                     <div className="mx-auto max-w-[1240px] px-4 pb-16 pt-14 sm:px-6 lg:px-8 lg:pt-20">
-                        <div className="grid gap-8 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:items-end">
-                            <h1 className="font-display text-[clamp(44px,6.6vw,84px)] font-semibold leading-[0.95] tracking-[-0.01em] text-balance text-readout">
-                                Find the attacks in your security logs
-                            </h1>
-                            <div className="max-w-[52ch]">
-                                <p className="text-lg text-muted">
+                        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,1fr)]">
+                            <div>
+                                <h1 className="font-display text-[clamp(44px,6.2vw,84px)] font-semibold leading-[0.95] tracking-[-0.01em] text-balance text-readout">
+                                    Find the attacks in your security logs
+                                </h1>
+                                <p className="mt-6 max-w-[54ch] text-lg text-muted">
                                     Upload a log file and ThreatEye checks it for brute-force logins, port scans, SQL
                                     injection and cross-site scripting. Every alert shows the rows behind it and how its
                                     score was worked out.
                                 </p>
-                                <div className="mt-6 flex flex-wrap gap-3">
+                                <div className="mt-8 flex flex-wrap gap-3">
                                     {signedIn ? (
                                         <Button to="/dashboard" variant="primary" size="lg">Open dashboard</Button>
                                     ) : (
@@ -395,6 +398,12 @@ export default function Landing() {
                                     )}
                                 </div>
                             </div>
+                            <figure className="mx-auto w-full max-w-[480px]">
+                                <Radar contacts={CONTACTS} />
+                                <figcaption className="mt-3 text-center text-sm text-faint">
+                                    Source IPs from the sample day. Hover a contact; closer to the centre means higher risk.
+                                </figcaption>
+                            </figure>
                         </div>
 
                         <div id="replay" className="mt-14 scroll-mt-24">

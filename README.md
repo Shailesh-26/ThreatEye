@@ -16,21 +16,24 @@ fired, and shows everything on an analyst dashboard.
 | Sign-up and sign-in with JWT access + refresh tokens, server-side sign-out | ✅ |
 | Public landing page with a replay of a real sample dataset | ✅ |
 | Command palette (Ctrl+K): go to pages, run detectors, sign out | ✅ |
-| Upload logs (CSV, XLSX, JSON, TXT) with validation | ✅ |
+| Upload logs (CSV, XLSX, JSON, TXT) by drag and drop, or load a sample dataset in one click | ✅ |
+| Dashboard: radar of source IPs by risk, activity over time, severity, attacking sources, detector counts | ✅ |
+| Logs: search, event filters, "only rows in alerts", time-range links from the dashboard, row details | ✅ |
+| Alerts: investigation panel with Summary, Evidence, Timeline and IOCs tabs; keyboard navigation | ✅ |
 | Brute force detection (5+ failures in 5 min, escalates on successful login) | ✅ |
 | Port scan detection (10+ ports in 60 s, or IDS-labelled events) | ✅ |
 | SQL injection detection (8 technique patterns, URL-decoding) | ✅ |
 | XSS detection (6 technique patterns, URL-decoding) | ✅ |
 | Explainable scores: threat, confidence, risk, severity, reasons | ✅ |
-| Evidence per alert: which field matched, excerpt, technique | ✅ (API; UI next) |
+| Evidence per alert: which field matched, excerpt, technique | ✅ |
 | IOC extraction (IPs, domains, URLs, emails, hashes) | ✅ |
 | MITRE ATT&CK technique per alert | ✅ |
-| Automated tests (`pytest`) | ✅ 57 tests |
+| Automated tests (`pytest`) | ✅ 61 tests |
 | Saved alert history, incidents, IP blocking | Planned |
 
 ## Tech stack
 
-- **Frontend:** React 19, Vite, Tailwind CSS 4, React Router, Axios, Recharts, Framer Motion, IBM Plex fonts
+- **Frontend:** React 19, Vite, Tailwind CSS 4, React Router, Axios, Framer Motion, IBM Plex fonts (charts and radar are hand-built SVG)
 - **Backend:** Python, FastAPI, Pandas, python-jose (JWT), passlib/bcrypt
 - **Database:** MongoDB (via Motor, async)
 
@@ -53,8 +56,8 @@ npm install                     # first time only
 npm run dev                     # http://localhost:5173
 ```
 
-Open http://localhost:5173, choose **Create account**, then upload a file from
-`datasets/` on the Logs page (expected results: [docs/DATASETS.md](docs/DATASETS.md)).
+Open http://localhost:5173, choose **Create account**, then on the Dashboard choose
+**Load the sample day**, or upload a file from `datasets/` on the Logs page (expected results: [docs/DATASETS.md](docs/DATASETS.md)).
 
 ## Run the tests
 
